@@ -3,860 +3,618 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Juan de Dios Alvarez · Data Story</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Juan de Dios Alvarez · Data Practitioner</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 
-/* ─────────────────────────────────────────
-   PAGE — A4 print target
-   Sets physical page dimensions and margins
-   for browser Print dialog (Ctrl/Cmd+P).
-───────────────────────────────────────── */
 @page {
   size: A4 portrait;
-  margin: 1.6cm 2cm;
+  margin: 1.8cm 2.2cm;
 }
 
-/* ─────────────────────────────────────────
-   COLD ZINC THEME — v3
-   Same palette as v2. Print layer now
-   preserves backgrounds via print-color-adjust.
-───────────────────────────────────────── */
+/* ─── PALETTE ─── warm editorial: cream + deep warm ink + rust accent */
 :root {
-  --ink:      #09090b;   /* zinc-950 */
-  --paper:    #ffffff;
-  --accent:   #dc2626;   /* red-600 */
-  --muted:    #71717a;   /* zinc-500 */
-  --light:    #e4e4e7;   /* zinc-200 */
-  --card:     #ffffff;
-  --dark:     #18181b;   /* zinc-900 */
-  --surface:  #f4f4f5;   /* zinc-100 */
-  --grid:     rgba(220,38,38,0.06);
+  --ink:     #1a1208;   /* deep warm brown-black   */
+  --paper:   #f7f3ed;   /* warm cream               */
+  --accent:  #9a3412;   /* rust / burnt sienna      */
+  --muted:   #7a6f65;   /* warm stone               */
+  --light:   #ddd5c9;   /* warm divider             */
+  --rule:    #c4b8ac;   /* hairline rule            */
+  --surface: #ede8e1;   /* warm card fill           */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: 'Crimson Pro', Georgia, serif;
   background: var(--paper);
   color: var(--ink);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─────────────────────────────────────────
-   HERO
-───────────────────────────────────────── */
-.hero {
-  background: var(--dark);
-  color: var(--paper);
-  padding: 5rem 5rem 4.5rem;
-  position: relative;
-  overflow: hidden;
-  min-height: 72vh;
+/* ─── LAYOUT ─── */
+.page {
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 3.5rem 3.5rem;
+}
+
+/* ═══════════════════════════════════════
+   MASTHEAD
+═══════════════════════════════════════ */
+.masthead {
+  border-top: 3px solid var(--ink);
+  padding-top: 1.6rem;
+  margin-bottom: 0;
+}
+
+.mast-eyeline {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
 }
 
-.hero::before {
-  content: '';
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-}
-
-.hero::after {
-  content: '';
-  position: absolute;
-  top: -80px; right: -80px;
-  width: 500px; height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(220,38,38,0.18) 0%, transparent 65%);
-  pointer-events: none;
-}
-
-.hero-meta {
+.mast-label {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--accent);
-  margin-bottom: 2rem;
-  opacity: 0;
-  animation: fadeUp 0.6s ease-out 0.15s forwards;
-}
-
-.hero h1 {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(3.2rem, 6vw, 5.8rem);
-  line-height: 1.0;
-  letter-spacing: -0.03em;
-  margin-bottom: 1.1rem;
-  opacity: 0;
-  animation: fadeUp 0.7s ease-out 0.3s forwards;
-}
-
-.hero h1 em {
-  color: var(--accent);
-  font-style: italic;
-}
-
-.hero-role {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.35);
-  letter-spacing: 0.06em;
-  margin-bottom: 2.2rem;
-  opacity: 0;
-  animation: fadeUp 0.7s ease-out 0.45s forwards;
-}
-
-.hero-hook {
-  max-width: 640px;
-  font-size: 1.05rem;
-  line-height: 1.8;
-  font-weight: 300;
-  color: rgba(255,255,255,0.65);
-  opacity: 0;
-  animation: fadeUp 0.7s ease-out 0.6s forwards;
-}
-
-.hero-hook strong {
-  color: #ffffff;
-  font-weight: 500;
-}
-
-.hero-stamp {
-  position: absolute;
-  top: 3rem;
-  right: 5rem;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.58rem;
-  color: rgba(255,255,255,0.14);
-  letter-spacing: 0.12em;
-  text-align: right;
-  line-height: 1.8;
-}
-
-/* ─────────────────────────────────────────
-   SHARED
-───────────────────────────────────────── */
-.section-eyebrow {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
   color: var(--muted);
+}
+
+.mast-url {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--rule);
+  letter-spacing: 0.06em;
+}
+
+.mast-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.025em;
   margin-bottom: 0.6rem;
+  opacity: 0;
+  animation: fadeIn 0.7s ease-out 0.1s forwards;
+}
+
+.mast-roles {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeIn 0.7s ease-out 0.3s forwards;
+}
+
+/* two-column body: bio left, metrics right */
+.mast-body {
+  display: grid;
+  grid-template-columns: 1fr 210px;
+  gap: 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  animation: fadeIn 0.7s ease-out 0.5s forwards;
+}
+
+.mast-bio {
+  padding: 1.5rem 2.5rem 1.5rem 0;
+  font-size: 1.06rem;
+  line-height: 1.8;
+  font-weight: 300;
+  border-right: 1px solid var(--rule);
+}
+
+.mast-bio strong {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.mast-metrics {
+  padding: 1.5rem 0 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.metric { }
+
+.metric-value {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--accent);
+  display: block;
+}
+
+.metric:nth-child(2) .metric-value,
+.metric:nth-child(3) .metric-value { color: var(--ink); }
+.metric:nth-child(4) .metric-value { color: var(--muted); }
+
+.metric-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.54rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+
+/* ═══════════════════════════════════════
+   SECTIONS — shared
+═══════════════════════════════════════ */
+.section {
+  padding-top: 2.5rem;
+  margin-bottom: 0;
+  border-top: 1px solid var(--rule);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  margin-bottom: 1.8rem;
+}
+
+.section-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  flex-shrink: 0;
 }
 
 .section-title {
   font-family: 'DM Serif Display', serif;
-  font-size: 2.2rem;
-  line-height: 1.15;
-  margin-bottom: 0.4rem;
-}
-
-.section-sub {
-  font-size: 0.88rem;
-  color: var(--muted);
-  font-weight: 300;
-  margin-bottom: 3rem;
-}
-
-/* ─────────────────────────────────────────
-   NARRATIVE
-───────────────────────────────────────── */
-.narrative-section {
-  padding: 5rem;
-  background: var(--paper);
-  border-top: 1px solid var(--light);
-}
-
-.narrative-inner { max-width: 820px; }
-
-.pull-quote {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.5rem;
-  font-style: italic;
-  line-height: 1.5;
+  font-size: 1.55rem;
+  line-height: 1;
   color: var(--ink);
-  border-left: 4px solid var(--accent);
-  padding: 0.6rem 0 0.6rem 1.6rem;
-  margin: 2.5rem 0;
 }
 
-.pull-quote cite {
-  display: block;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.65rem;
-  font-style: normal;
-  color: var(--muted);
-  letter-spacing: 0.08em;
-  margin-top: 0.6rem;
+.section-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+  margin-left: 0.5rem;
 }
 
-.narrative-section p {
-  font-size: 0.98rem;
-  line-height: 1.85;
-  font-weight: 300;
-  color: var(--ink);
-  margin-bottom: 1rem;
-}
-
-.narrative-section p strong {
-  font-weight: 600;
-  color: var(--accent);
-}
-
-.seq-pills {
-  display: flex;
-  gap: 0;
-  flex-wrap: wrap;
-  margin-top: 1.5rem;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.72rem;
-}
-
-.seq-pill {
-  padding: 0.55rem 1.1rem;
-  background: var(--ink);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.seq-pill:nth-child(2) { background: #27272a; }
-.seq-pill:nth-child(3) { background: #3f3f46; }
-.seq-pill:nth-child(4) { background: var(--accent); }
-
-/* ─────────────────────────────────────────
-   KPIs
-───────────────────────────────────────── */
-.kpi-section {
-  padding: 5rem;
-  background: var(--surface);
-}
-
-.kpi-grid {
+/* ═══════════════════════════════════════
+   01 · THREE PROBLEMS
+═══════════════════════════════════════ */
+.problems-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   border: 1px solid var(--light);
   background: var(--light);
   gap: 1px;
-  margin-top: 2.5rem;
 }
 
-.kpi {
-  background: var(--card);
-  padding: 2.2rem 1.5rem;
-  text-align: center;
-  position: relative;
-}
-
-.kpi::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--accent);
-}
-
-.kpi-number {
-  font-family: 'DM Serif Display', serif;
-  font-size: 2.8rem;
-  line-height: 1;
-  margin-bottom: 0.5rem;
-  color: var(--accent);
-}
-
-.kpi:nth-child(2) .kpi-number { color: var(--ink); }
-.kpi:nth-child(3) .kpi-number { color: var(--ink); }
-.kpi:nth-child(4) .kpi-number { color: var(--ink); }
-.kpi:nth-child(5) .kpi-number { color: var(--muted); }
-
-.kpi:nth-child(2)::after { background: var(--ink); }
-.kpi:nth-child(3)::after { background: var(--ink); }
-.kpi:nth-child(4)::after { background: var(--ink); }
-.kpi:nth-child(5)::after { background: var(--muted); }
-
-.kpi-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-  line-height: 1.55;
-}
-
-/* ─────────────────────────────────────────
-   FIT ANALYSIS
-───────────────────────────────────────── */
-.fit-section {
-  padding: 5rem;
-  background: var(--dark);
-  color: #ffffff;
-}
-
-.fit-section .section-eyebrow { color: rgba(255,255,255,0.28); }
-.fit-section .section-title   { color: #ffffff; }
-.fit-section .section-sub     { color: rgba(255,255,255,0.38); margin-bottom: 3rem; }
-
-.fit-header-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  margin-bottom: 1px;
-  background: rgba(255,255,255,0.07);
-}
-
-.fit-col-head {
-  padding: 0.7rem 1.5rem;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.62rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-}
-
-.fit-col-head.req { color: rgba(255,255,255,0.32); }
-.fit-col-head.ev  { color: var(--accent); }
-
-.fit-table {
-  display: grid;
-  gap: 1px;
-  background: rgba(255,255,255,0.07);
-}
-
-.fit-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: rgba(255,255,255,0.07);
-}
-
-.fit-req, .fit-ev {
-  padding: 1.6rem 1.8rem;
-  background: rgba(255,255,255,0.03);
-}
-
-.fit-req p {
-  font-size: 0.84rem;
-  color: rgba(255,255,255,0.42);
-  font-style: italic;
-  font-weight: 300;
-  line-height: 1.6;
-}
-
-.fit-ev p {
-  font-size: 0.85rem;
-  color: #ffffff;
-  font-weight: 400;
-  line-height: 1.65;
-}
-
-.fit-ev p strong { color: #fca5a5; font-weight: 600; }
-
-.fit-ev-tag {
-  display: inline-block;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.58rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--accent);
-  margin-bottom: 0.5rem;
-}
-
-/* ─────────────────────────────────────────
-   CAREER ARC
-───────────────────────────────────────── */
-.arc-section {
-  padding: 5rem;
+.prob-card {
   background: var(--paper);
-  border-top: 1px solid var(--light);
-}
-
-.arc {
-  position: relative;
-  padding-left: 3.5rem;
-  margin-top: 1rem;
-}
-
-.arc::before {
-  content: '';
-  position: absolute;
-  left: 10px;
-  top: 8px; bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom,
-    var(--accent) 0%,
-    var(--ink) 50%,
-    var(--muted) 100%);
-}
-
-.arc-item {
-  position: relative;
-  padding-bottom: 2.5rem;
-}
-
-.arc-item:last-child { padding-bottom: 0; }
-
-.arc-dot {
-  position: absolute;
-  left: -3.08rem;
-  top: 6px;
-  width: 16px; height: 16px;
-  border-radius: 50%;
-  background: var(--paper);
-  border: 2.5px solid var(--accent);
-  z-index: 1;
-}
-
-.arc-item:nth-child(2) .arc-dot { border-color: var(--accent); }
-.arc-item:nth-child(3) .arc-dot { border-color: var(--ink); }
-.arc-item:nth-child(4) .arc-dot { border-color: var(--ink); }
-.arc-item:nth-child(5) .arc-dot { border-color: var(--ink); }
-.arc-item:nth-child(6) .arc-dot { border-color: var(--muted); }
-.arc-item:nth-child(7) .arc-dot { border-color: var(--accent); }
-
-.arc-period {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.68rem;
-  color: var(--accent);
-  font-weight: 500;
-  margin-bottom: 0.15rem;
-}
-
-.arc-item:nth-child(3) .arc-period { color: var(--ink); }
-.arc-item:nth-child(4) .arc-period { color: var(--ink); }
-.arc-item:nth-child(5) .arc-period { color: var(--muted); }
-
-.arc-role {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.1rem;
-  line-height: 1.2;
-  margin-bottom: 0.1rem;
-}
-
-.arc-org {
-  font-size: 0.8rem;
-  font-weight: 600;
-  margin-bottom: 0.4rem;
-  color: var(--ink);
-}
-
-.arc-note {
-  font-size: 0.82rem;
-  color: var(--muted);
-  line-height: 1.65;
-  max-width: 580px;
-}
-
-/* ─────────────────────────────────────────
-   PROJECTS
-───────────────────────────────────────── */
-.projects-section {
-  padding: 5rem;
-  background: var(--surface);
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-top: 0;
-}
-
-.proj-card {
-  background: var(--card);
-  color: var(--ink);
-  padding: 2rem 1.8rem;
+  padding: 2rem 1.8rem 1.8rem;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--light);
-  border-top: 3px solid var(--accent);
 }
 
-.proj-card:nth-child(2) { border-top-color: var(--ink); }
-.proj-card:nth-child(3) { border-top-color: var(--muted); }
+.prob-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--light);
+}
 
-.proj-bg-num {
+.prob-card:nth-child(1)::after { background: var(--accent); }
+.prob-card:nth-child(2)::after { background: var(--ink); }
+.prob-card:nth-child(3)::after { background: var(--muted); }
+
+.prob-bg-num {
   font-family: 'DM Serif Display', serif;
-  font-size: 5rem;
+  font-size: 5.5rem;
   line-height: 1;
   color: var(--light);
   position: absolute;
-  top: 0.2rem; right: 0.8rem;
+  top: 0.1rem; right: 0.7rem;
+  pointer-events: none;
+  user-select: none;
 }
 
-.proj-type {
+.prob-domain {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.6rem;
+  font-size: 0.56rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   color: var(--accent);
-  margin-bottom: 0.9rem;
+  margin-bottom: 1rem;
 }
 
-.proj-card:nth-child(2) .proj-type { color: var(--ink); }
-.proj-card:nth-child(3) .proj-type { color: var(--muted); }
+.prob-card:nth-child(2) .prob-domain { color: var(--ink); }
+.prob-card:nth-child(3) .prob-domain { color: var(--muted); }
 
-.proj-title {
+.prob-q {
   font-family: 'DM Serif Display', serif;
-  font-size: 1.1rem;
-  line-height: 1.3;
-  font-weight: 400;
-  margin-bottom: 0.8rem;
+  font-size: 1.08rem;
+  font-style: italic;
+  line-height: 1.5;
   color: var(--ink);
+  margin-bottom: 1.2rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--light);
+  flex-shrink: 0;
 }
 
-.proj-desc {
-  font-size: 0.79rem;
+.prob-ev {
+  font-size: 0.87rem;
   line-height: 1.7;
   color: var(--muted);
   font-weight: 300;
   flex: 1;
-  margin-bottom: 1.4rem;
-}
-
-.proj-relevance {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.65rem;
-  line-height: 1.6;
-  color: var(--muted);
-  border-top: 1px solid var(--light);
-  padding-top: 0.9rem;
-}
-
-.proj-relevance strong { color: var(--accent); }
-.proj-card:nth-child(2) .proj-relevance strong { color: var(--ink); }
-.proj-card:nth-child(3) .proj-relevance strong { color: var(--muted); }
-
-/* ─────────────────────────────────────────
-   TECH STACK
-───────────────────────────────────────── */
-.stack-section {
-  padding: 5rem;
-  background: var(--paper);
-  border-top: 1px solid var(--light);
-}
-
-.stack-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3.5rem;
-  margin-top: 0;
-}
-
-.stack-cat h4 {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.66rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--muted);
   margin-bottom: 1.2rem;
-  padding-bottom: 0.4rem;
+}
+
+.prob-ev strong { color: var(--ink); font-weight: 600; }
+
+.prob-ref {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.56rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--rule);
+  margin-top: auto;
+  padding-top: 0.9rem;
+  border-top: 1px dashed var(--light);
+}
+
+/* ═══════════════════════════════════════
+   02 · WORK HISTORY
+═══════════════════════════════════════ */
+.work-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.work-table tbody tr {
   border-bottom: 1px solid var(--light);
+  transition: background 0.15s;
 }
 
-.bar-row {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-bottom: 0.65rem;
+.work-table tbody tr:last-child { border-bottom: none; }
+.work-table tbody tr:hover { background: var(--surface); }
+
+.work-table td {
+  padding: 1rem 0.8rem 1rem 0;
+  vertical-align: top;
 }
 
-.bar-name {
-  font-size: 0.79rem;
-  font-weight: 500;
-  width: 132px;
-  flex-shrink: 0;
+.work-table td:last-child { padding-right: 0; }
+
+.td-period {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--muted);
+  white-space: nowrap;
+  width: 108px;
+  padding-top: 1.1rem;
 }
 
-.bar-track {
-  flex: 1;
-  height: 4px;
-  background: var(--light);
-  border-radius: 1px;
-  overflow: hidden;
+.td-org {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.05rem;
+  color: var(--ink);
+  white-space: nowrap;
+  width: 190px;
+  padding-right: 1.5rem;
 }
 
-.bar-fill {
-  height: 100%;
-  border-radius: 1px;
-  width: 0;
-  background: var(--accent);
-  transition: width 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+.td-role {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.56rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--rule);
+  white-space: nowrap;
+  width: 160px;
+  padding-top: 1.05rem;
+  padding-right: 1.5rem;
 }
 
-.cat-eng  .bar-fill { background: var(--ink); }
-.cat-viz  .bar-fill { background: var(--muted); }
-.cat-infra .bar-fill { background: #52525b; }
-
-/* ─────────────────────────────────────────
-   ALIGNMENT
-───────────────────────────────────────── */
-.alignment-section {
-  padding: 5rem;
-  background: var(--ink);
-  color: #ffffff;
+.td-outcome {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--muted);
+  font-weight: 300;
 }
 
-.alignment-section .section-eyebrow { color: rgba(255,255,255,0.25); }
-.alignment-section .section-title   { color: #ffffff; }
-.alignment-section .section-sub     { color: rgba(255,255,255,0.35); margin-bottom: 3.5rem; }
+.td-outcome strong { color: var(--ink); font-weight: 600; }
 
-.align-grid {
+/* ═══════════════════════════════════════
+   03 · ACADEMIC FOUNDATION
+═══════════════════════════════════════ */
+.foundation-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5rem;
+  gap: 4rem;
 }
 
-.align-col h3 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.3rem;
-  margin-bottom: 1.6rem;
-  color: #ffffff;
-}
-
-.values-list { list-style: none; }
-
-.values-list li {
-  padding: 1rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.9rem;
-  font-size: 0.83rem;
-  line-height: 1.6;
-  font-weight: 300;
-  color: rgba(255,255,255,0.58);
-}
-
-.values-list li:last-child { border-bottom: none; }
-
-.val-marker {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.7rem;
-  color: var(--accent);
-  opacity: 0.6;
-  margin-top: 0.15rem;
-  flex-shrink: 0;
-}
-
-.val-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--accent);
-  display: block;
-  margin-bottom: 0.25rem;
-  font-weight: 500;
-}
-
-.lang-list { list-style: none; }
-
-.lang-item { padding: 0.9rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
-.lang-item:last-child { border-bottom: none; }
-
-.lang-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 0.45rem;
-}
-
-.lang-name {
-  font-size: 0.88rem;
-  font-weight: 500;
-}
-
-.lang-level {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--accent);
-}
-
-.lang-track {
-  height: 3px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.lang-fill {
-  height: 100%;
-  border-radius: 2px;
-  background: var(--accent);
-  width: 0;
-  transition: width 1.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.lang-note {
-  font-size: 0.7rem;
-  color: rgba(255,255,255,0.28);
-  margin-top: 0.35rem;
-  font-style: italic;
-  line-height: 1.5;
-}
-
-.reloc-box {
-  margin-top: 1.8rem;
-  padding: 1.1rem 1.4rem;
-  background: rgba(220,38,38,0.09);
-  border-left: 3px solid var(--accent);
-}
-
-.reloc-label {
+.col-label {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.58rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--light);
+}
+
+.edu-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--light);
+}
+
+.edu-item:last-child { border-bottom: none; }
+
+.edu-period {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
   color: var(--accent);
+  margin-bottom: 0.2rem;
+}
+
+.edu-degree {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem;
+  line-height: 1.2;
+  margin-bottom: 0.15rem;
+  color: var(--ink);
+}
+
+.edu-school {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
   margin-bottom: 0.4rem;
 }
 
-.reloc-box p {
+.edu-note {
   font-size: 0.8rem;
-  font-weight: 300;
-  color: rgba(255,255,255,0.58);
-  line-height: 1.6;
-}
-
-/* ─────────────────────────────────────────
-   CLOSING
-───────────────────────────────────────── */
-.closing-section {
-  padding: 4.5rem 5rem;
-  background: var(--accent);
-  color: white;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 4rem;
-  align-items: center;
-}
-
-.closing-quote {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.7rem;
   font-style: italic;
-  line-height: 1.45;
+  color: var(--muted);
+  line-height: 1.55;
+  font-weight: 300;
 }
 
-.closing-contact { text-align: right; flex-shrink: 0; }
+.cert-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--light);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.9rem;
+  align-items: start;
+}
 
-.closing-name {
+.cert-item:last-child { border-bottom: none; }
+
+.cert-mark {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--accent);
+  margin-top: 0.2rem;
+}
+
+.cert-name {
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 0.1rem;
   font-family: 'DM Serif Display', serif;
-  font-size: 1.4rem;
+}
+
+.cert-detail {
+  font-size: 0.76rem;
+  color: var(--muted);
+  line-height: 1.55;
+  font-weight: 300;
+}
+
+.pub-block {
+  margin-top: 1.5rem;
+  padding: 1.1rem 1.3rem;
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+}
+
+.pub-count {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.pub-text {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.6;
+  font-weight: 300;
   margin-bottom: 0.6rem;
 }
 
-.closing-line {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.7rem;
-  opacity: 0.72;
-  line-height: 1.85;
-  letter-spacing: 0.02em;
-}
-
-/* ─────────────────────────────────────────
-   FOOTER
-───────────────────────────────────────── */
-footer {
-  padding: 1.4rem 5rem;
-  background: var(--ink);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 2rem;
-}
-
-footer span {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.58rem;
-  color: rgba(255,255,255,0.16);
-  letter-spacing: 0.08em;
-}
-
-/* ─────────────────────────────────────────
-   ANIMATIONS  (screen only)
-───────────────────────────────────────── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ─────────────────────────────────────────
-   ORCID
-───────────────────────────────────────── */
-.orcid-kpi-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-  margin-top: 0.55rem;
-  text-decoration: none;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.48rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #A6CE39;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-}
-
-.orcid-kpi-link:hover { opacity: 1; }
-
-.orcid-kpi-link svg {
-  width: 13px; height: 13px;
-  flex-shrink: 0;
-  vertical-align: middle;
-}
-
-.closing-orcid {
+.pub-orcid {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  text-decoration: none;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.7rem;
-  opacity: 0.72;
-  line-height: 1.85;
-  letter-spacing: 0.02em;
-  color: inherit;
+  font-size: 0.56rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #A6CE39;
+  opacity: 0.75;
+  text-decoration: none;
   transition: opacity 0.2s;
 }
 
-.closing-orcid:hover { opacity: 1; }
+.pub-orcid:hover { opacity: 1; }
+.pub-orcid svg { flex-shrink: 0; vertical-align: middle; }
 
-.closing-orcid svg {
-  width: 15px; height: 15px;
-  flex-shrink: 0;
-  vertical-align: middle;
+/* ═══════════════════════════════════════
+   04 · CAPABILITIES
+═══════════════════════════════════════ */
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem 3rem;
 }
 
-/* ═════════════════════════════════════════
-   PRINT — v3
-   Strategy: preserve the visual identity
-   exactly as rendered on screen.
-   • print-color-adjust: exact  → dark backgrounds print dark
-   • CSS custom property --w    → bar fills resolve without JS
-   • beforeprint handler (JS)   → counters show final values
-   • @page                      → A4 dimensions + margins
-   • break-* rules              → controlled pagination
-═════════════════════════════════════════ */
-@media print {
+.cap-group h4 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--light);
+}
 
-  /* ── Universal: force exact color reproduction ── */
+.cap-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.cap-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.66rem;
+  padding: 0.22rem 0.6rem;
+  background: var(--paper);
+  color: var(--muted);
+  border: 1px solid var(--light);
+  letter-spacing: 0.02em;
+  cursor: default;
+  transition: all 0.15s;
+}
+
+.cap-tag:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.cap-tag.hi {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+/* ═══════════════════════════════════════
+   CLOSE — languages + contact
+═══════════════════════════════════════ */
+.close-strip {
+  padding-top: 2.5rem;
+  border-top: 2px solid var(--ink);
+  max-width: 420px;
+  margin-top: 0;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+
+.close-strip.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.close-col-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--light);
+}
+
+.lang-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--light);
+  font-size: 0.9rem;
+}
+
+.lang-row:last-child { border-bottom: none; }
+
+.lang-name-text { font-weight: 600; }
+
+.lang-level-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.reloc-note {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+
+/* ═══════════════════════════════════════
+   PAGE FOOTER
+═══════════════════════════════════════ */
+.page-footer {
+  padding-top: 1.2rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-footer span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.54rem;
+  color: var(--rule);
+  letter-spacing: 0.06em;
+}
+
+/* ═══════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════ */
+@keyframes fadeIn {
+  to { opacity: 1; transform: none; }
+}
+
+/* ═══════════════════════════════════════
+   PRINT
+═══════════════════════════════════════ */
+@media print {
   * {
     print-color-adjust: exact !important;
     -webkit-print-color-adjust: exact !important;
@@ -864,646 +622,507 @@ footer span {
     transition: none !important;
   }
 
-  /* ── Body baseline ── */
-  body {
-    font-size: 9pt;
-    line-height: 1.5;
+  body { font-size: 9pt; }
+  .page { padding: 0; max-width: 100%; }
+
+  /* restore all animated opacities */
+  .mast-name, .mast-roles, .mast-body, .mast-contact,
+  .section, .close-strip {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
-  /* ── HERO ─────────────────────────────────────
-     Remove decorative pseudo-elements (grid + glow)
-     that do not add value at print resolution.
-     Restore opacity for elements animated to 0.
-  ─────────────────────────────────────────────── */
-  .hero {
-    min-height: auto;
-    padding: 2rem 2.5rem 2.2rem;
-    /* Dark background preserved via print-color-adjust */
-  }
+  .section { padding-top: 1.6rem; }
+  .section-head { margin-bottom: 1.2rem; }
 
-  /* Decorative background effects: omit for print clarity */
-  .hero::before,
-  .hero::after { display: none; }
+  /* Problems */
+  .prob-card { padding: 1.2rem 1.2rem 1rem; }
+  .prob-q { font-size: 0.95rem; }
+  .prob-ev { font-size: 0.8rem; }
+  .prob-bg-num { font-size: 4rem; }
 
-  /* Animated elements start at opacity:0 — override for print */
-  .hero-meta  { opacity: 1 !important; color: var(--accent) !important; }
-  .hero h1    { opacity: 1 !important; font-size: 2.9rem; }
-  .hero h1 em { color: var(--accent) !important; }
-  .hero-role  { opacity: 1 !important; color: rgba(255,255,255,0.45) !important; }
-  .hero-hook  { opacity: 1 !important; max-width: 100%; }
-  .hero-stamp { color: rgba(255,255,255,0.22) !important; }
+  /* Work */
+  .td-outcome { font-size: 0.82rem; }
+  .work-table tbody tr:hover { background: none; }
 
-  /* ── SECTION PADDING — scale down for A4 ── */
-  .narrative-section  { padding: 1.8rem 2.5rem; }
-  .kpi-section        { padding: 1.6rem 2.5rem; }
-  .fit-section        { padding: 1.8rem 2.5rem; }
-  .arc-section        { padding: 1.8rem 2.5rem; }
-  .projects-section   { padding: 1.8rem 2.5rem; }
-  .stack-section      { padding: 1.8rem 2.5rem; }
-  .alignment-section  { padding: 1.8rem 2.5rem; }
-  .closing-section    { padding: 1.4rem 2.5rem; }
+  /* Foundation */
+  .foundation-grid { gap: 2.5rem; }
+  .edu-note { font-size: 0.74rem; }
 
-  /* ── TYPOGRAPHY ── */
-  .section-title  { font-size: 1.65rem; margin-bottom: 0.3rem; }
-  .section-sub    { margin-bottom: 1.4rem; font-size: 0.82rem; }
-  .pull-quote     { font-size: 1.2rem; margin: 1.4rem 0; }
-  .narrative-section p { font-size: 0.88rem; line-height: 1.7; margin-bottom: 0.7rem; }
+  /* Capabilities */
+  .cap-grid { gap: 1.2rem 2rem; }
 
-  /* ── KPI GRID ── */
-  .kpi-grid   { margin-top: 1rem; }
-  .kpi        { padding: 1.4rem 0.8rem; }
-  .kpi-number { font-size: 2.1rem; }
+  /* Page breaks */
+  .problems-section  { break-before: page; }
+  .foundation-section { break-before: page; }
+  .capabilities-section { break-before: page; }
 
-  /* ── SEQUENCE PILLS ── */
-  .seq-pills { margin-top: 1rem; }
+  /* No split */
+  .prob-card   { break-inside: avoid; }
+  .edu-item    { break-inside: avoid; }
+  .cert-item   { break-inside: avoid; }
+  .work-table tbody tr { break-inside: avoid; }
+  .close-strip { break-inside: avoid; }
+  .pub-block   { break-inside: avoid; }
+  .cap-group   { break-inside: avoid; }
 
-  /* ── FIT ANALYSIS ── */
-  .fit-req, .fit-ev { padding: 1rem 1.2rem; }
-  .fit-req p  { font-size: 0.79rem; }
-  .fit-ev p   { font-size: 0.8rem; line-height: 1.55; }
-
-  /* ── CAREER ARC ── */
-  .arc        { padding-left: 2.5rem; }
-  .arc-item   { padding-bottom: 1.4rem; }
-  .arc-note   { font-size: 0.77rem; line-height: 1.55; max-width: 100%; }
-  .arc-role   { font-size: 1rem; }
-
-  /* ── PROJECTS ── */
-  .projects-grid  { gap: 0.7rem; }
-  .proj-card      { padding: 1.2rem 1rem 1rem; }
-  .proj-desc      { font-size: 0.74rem; line-height: 1.6; margin-bottom: 0.9rem; }
-  .proj-relevance { font-size: 0.6rem; padding-top: 0.6rem; }
-  .proj-bg-num    { font-size: 3.5rem; }
-
-  /* ── TECH STACK ── */
-  .stack-grid { gap: 2rem; }
-  .bar-name   { font-size: 0.75rem; width: 115px; }
-
-  /* ── BAR FILLS — resolved from CSS custom property --w ──
-     The --w property is set inline on each element.
-     No JavaScript required at print time.
-  ── */
-  .bar-fill  { width: var(--w, 0) !important; }
-  .lang-fill { width: var(--w, 0) !important; }
-
-  /* ── ALIGNMENT ── */
-  .align-grid     { gap: 3rem; }
-  .values-list li { font-size: 0.78rem; padding: 0.7rem 0; }
-  .val-marker     { opacity: 1 !important; }
-  .lang-item      { padding: 0.6rem 0; }
-  .lang-name      { font-size: 0.82rem; }
-  .lang-note      { font-size: 0.62rem; }
-  .reloc-box      { margin-top: 1.2rem; padding: 0.8rem 1rem; }
-  .reloc-box p    { font-size: 0.76rem; }
-
-  /* ── CLOSING ── */
-  .closing-section { gap: 2.5rem; }
-  .closing-quote   { font-size: 1.3rem; line-height: 1.4; }
-  .closing-name    { font-size: 1.2rem; }
-
-  /* ── ORCID ── */
-  .orcid-kpi-link  { opacity: 1 !important; }
-  .closing-orcid   { opacity: 0.72 !important; display: flex; }
-
-  /* ── FOOTER — omit from print ── */
-  footer { display: none; }
-
-  /* ── PAGE BREAKS ──────────────────────────────
-     Page 1 : Hero + Narrative + KPIs
-     Page 2+ : Fit Analysis  (long; may span pages)
-     Next    : Career Arc
-     Next    : Projects  (flows into Tech Stack)
-     Next    : Alignment (flows into Closing)
-  ─────────────────────────────────────────────── */
-  .fit-section        { break-before: page; }
-  .arc-section        { break-before: page; }
-  .projects-section   { break-before: page; }
-  .alignment-section  { break-before: page; }
-
-  /* ── Avoid splitting these elements across pages ── */
-  .kpi-section        { break-inside: avoid; }
-  .kpi                { break-inside: avoid; }
-  .fit-row            { break-inside: avoid; }
-  .arc-item           { break-inside: avoid; }
-  .proj-card          { break-inside: avoid; }
-  .values-list li     { break-inside: avoid; }
-  .lang-item          { break-inside: avoid; }
-  .closing-section    { break-inside: avoid; }
-  .narrative-inner    { break-inside: avoid; }
-  .reloc-box          { break-inside: avoid; }
-
+  .page-footer { display: none; }
 }
 
-/* ─────────────────────────────────────────
+/* ═══════════════════════════════════════
    RESPONSIVE
-───────────────────────────────────────── */
-@media (max-width: 960px) {
-  .hero, .narrative-section, .kpi-section, .fit-section,
-  .arc-section, .projects-section, .stack-section,
-  .alignment-section, .closing-section, footer {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-  }
-  .kpi-grid          { grid-template-columns: repeat(3, 1fr); }
-  .fit-header-row,
-  .fit-row           { grid-template-columns: 1fr; }
-  .fit-req           { border-bottom: 1px solid rgba(255,255,255,0.07); }
-  .projects-grid     { grid-template-columns: 1fr; }
-  .stack-grid        { grid-template-columns: 1fr; }
-  .align-grid        { grid-template-columns: 1fr; gap: 3rem; }
-  .closing-section   { grid-template-columns: 1fr; }
-  .closing-contact   { text-align: left; }
+═══════════════════════════════════════ */
+@media (max-width: 880px) {
+  .page { padding: 2.5rem 2rem; }
+
+  .mast-body { grid-template-columns: 1fr; }
+  .mast-bio { border-right: none; padding-right: 0; border-bottom: 1px solid var(--rule); padding-bottom: 1.2rem; }
+  .mast-metrics { flex-direction: row; gap: 2rem; flex-wrap: wrap; padding-left: 0; padding-top: 1.2rem; }
+
+  .problems-grid { grid-template-columns: 1fr; gap: 1px; }
+  .prob-card { border-top: none; }
+  .prob-card::after { display: none; }
+  .prob-card:nth-child(1) { border-left: 3px solid var(--accent); }
+  .prob-card:nth-child(2) { border-left: 3px solid var(--ink); }
+  .prob-card:nth-child(3) { border-left: 3px solid var(--muted); }
+
+  .td-role { display: none; }
+  .foundation-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .cap-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 2rem; }
+  .close-strip { max-width: 100%; }
 }
 
-@media (max-width: 600px) {
-  .hero h1 { font-size: 2.8rem; }
-  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 560px) {
+  .page { padding: 2rem 1.4rem; }
+  .mast-name { font-size: 2.4rem; }
+  .cap-grid { grid-template-columns: 1fr; }
+  .td-org { width: auto; font-size: 0.9rem; }
+  .td-period { width: 80px; font-size: 0.56rem; }
 }
 
 </style>
 </head>
 <body>
+<div class="page">
 
 <!-- ═══════════════════════════════════════════
-     HERO
+     MASTHEAD
 ═══════════════════════════════════════════ -->
-<header class="hero">
-  <div class="hero-stamp">
-    Data Portfolio · 2026<br>
-    Full Lifecycle Data Science<br>
-    Juan de Dios Alvarez
+<header class="masthead">
+  <div class="mast-eyeline">
+    <span class="mast-label">Full-Lifecycle Data Practitioner</span>
+    <span class="mast-url">resume.juandedios.info · 2026</span>
   </div>
 
-  <div class="hero-meta">// candidate_profile · data_story.html</div>
+  <h1 class="mast-name">Juan de Dios Alvarez</h1>
 
-  <h1>Juan de Dios<br><em>Alvarez</em></h1>
+  <div class="mast-roles">
+    Data Scientist &nbsp;&middot;&nbsp; Data Engineer &nbsp;&middot;&nbsp; Geospatial Analyst &nbsp;&middot;&nbsp; ML Practitioner
+  </div>
 
-  <div class="hero-role">Data Scientist &nbsp;·&nbsp; Digital Transformation &nbsp;·&nbsp; Full Lifecycle</div>
+  <div class="mast-body">
+    <p class="mast-bio">
+      I build what the data team does not yet have — the pipeline that replaces the spreadsheet,
+      the model that goes beyond the notebook, the dashboard that needs no user manual.
+      Twenty years across <strong>particle physics, NLP, geospatial analysis, agricultural finance,
+      healthcare, education, and media</strong>: different domains, the same discipline.
+      Quality first. Accessible outputs. Value demonstrable before the scale-up.
+    </p>
+    <div class="mast-metrics">
+      <div class="metric">
+        <span class="metric-value">20+</span>
+        <span class="metric-label">Years with data</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">14</span>
+        <span class="metric-label">Scientific publications</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">7</span>
+        <span class="metric-label">Industries</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">CERN</span>
+        <span class="metric-label">International research credential</span>
+      </div>
+    </div>
+  </div>
 
-  <p class="hero-hook">
-    From processing <strong>cosmic ray events at the HAWC Observatory</strong> to rebuilding <strong>agricultural credit analysis at a national financial institution</strong> — twenty years of turning complex, untamed data into decisions that move organizations forward.
-    The source and format change every time. <strong>The discipline does not.</strong>
-  </p>
 </header>
 
-<!-- ═══════════════════════════════════════════
-     NARRATIVE
-═══════════════════════════════════════════ -->
-<section class="narrative-section">
-  <div class="narrative-inner">
-    <div class="section-eyebrow">// profile.narrative()</div>
-
-    <blockquote class="pull-quote">
-      "Translate data into actionable insights through data storytelling, empowering strategic decisions."
-      <cite>— Data Scientist · Role Description</cite>
-    </blockquote>
-
-    <p>
-      That is what I have done across <strong>seven industries</strong>, from particle physics to agricultural finance. The foundation came from the <strong>HAWC Observatory</strong> — a multinational cosmic ray experiment with distributed computing, petabyte-scale event data, and statistical analysis across institutions in the US and Mexico. That standard held: when the data is hard, the discipline matters most.
-    </p>
-
-    <p>
-      In industry, the data changed. At <strong>D3Clarity</strong>, I turned thousands of unstructured public school board meeting minutes into a competitive intelligence dashboard used daily by a sales team. The core task — classify text, surface patterns, structure the unlabeled — was familiar ground: my MSc thesis at the National Institute of Astrophysics addressed automatic text classification through prototype-based learning. That was 2009. At <strong>FIRA</strong>, I replaced manual Excel workflows with a governed pipeline integrating satellite imagery, climate models, and regulatory databases into credit decisions for agricultural producers. At <strong>CITEIM</strong>, I applied Transformer architectures to sign language recognition. The tools advanced. The method held.
-    </p>
-
-    <p>
-      Every engagement followed the same sequence: establish data quality, build outputs accessible to non-technical users, demonstrate value early, then scale. What makes work at this level engaging is the specific challenge it carries: shaping how data science functions inside an organization — building the culture, not executing within one that already exists. My technical trajectory has followed the broader AI evolution, from classical ML through production systems to generative AI. That progression is something to build on, not replace.
-    </p>
-
-    <div class="seq-pills">
-      <div class="seq-pill">01 · Governance</div>
-      <div class="seq-pill">02 · Literacy</div>
-      <div class="seq-pill">03 · Early PoC</div>
-      <div class="seq-pill">04 · Production</div>
-    </div>
-  </div>
-</section>
 
 <!-- ═══════════════════════════════════════════
-     KPIs
+     01 — THREE PROBLEMS I SOLVE
 ═══════════════════════════════════════════ -->
-<section class="kpi-section">
-  <div class="section-eyebrow">// career_metrics.json</div>
-  <div class="kpi-grid" id="kpi-strip">
-    <div class="kpi">
-      <div class="kpi-number" data-target="20" data-suffix="+">0</div>
-      <div class="kpi-label">Years with<br>data</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-number" data-target="14">0</div>
-      <div class="kpi-label">Scientific<br>publications</div>
-      <span class="orcid-kpi-link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" aria-hidden="true"><path d="M256 128c0 70.7-57.3 128-128 128S0 198.7 0 128 57.3 0 128 0s128 57.3 128 128z" fill="#A6CE39"/><path d="M86.3 186.2H70.9V79.1h15.4v107.1zM108.9 79.1h41.6c39.6 0 57 28.3 57 53.6 0 27.5-21.5 53.6-56.8 53.6h-41.8V79.1zm15.4 93.3h24.5c34.9 0 42.9-26.5 42.9-39.7C191.7 111.2 178 93 148 93h-23.7v79.4z" fill="#fff"/><path d="M88.7 56.8c0 5.5-4.5 10.1-10.1 10.1s-10.1-4.6-10.1-10.1c0-5.6 4.5-10.1 10.1-10.1s10.1 4.5 10.1 10.1z" fill="#fff"/></svg>
-        <span>orcid</span>
-      </span>
-    </div>
-    <div class="kpi">
-      <div class="kpi-number" data-target="7">0</div>
-      <div class="kpi-label">Industries<br>served</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-number" data-static>CERN</div>
-      <div class="kpi-label">International<br>research</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-number" data-static>E2E</div>
-      <div class="kpi-label">Full lifecycle<br>ownership</div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════
-     FIT ANALYSIS
-═══════════════════════════════════════════ -->
-<section class="fit-section">
-  <div class="section-eyebrow">// requirements_mapping.compare()</div>
-  <h2 class="section-title">The role. The context.</h2>
-  <p class="section-sub">Excerpts from the role requirements, with context from the work.</p>
-
-  <div class="fit-header-row">
-    <div class="fit-col-head req">The requirement</div>
-    <div class="fit-col-head ev">The work</div>
+<section class="section problems-section" id="s-problems">
+  <div class="section-head">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Three problems I solve.</h2>
+    <span class="section-rule"></span>
   </div>
 
-  <div class="fit-table">
+  <div class="problems-grid">
 
-    <div class="fit-row">
-      <div class="fit-req">
-        <p>"Collaborate within Agile squads to design and implement machine learning models that solve real business problems."</p>
-      </div>
-      <div class="fit-ev">
-        <span class="fit-ev-tag">D3Clarity · Agile · 4 yrs</span>
-        <p>Four years at <strong>D3Clarity</strong> in Agile/Scrum with Jira across distributed international teams. End-to-end ML delivery — NLP classification from unstructured public documents to Power BI dashboards used by sales teams. Every project: <strong>PoC → production</strong>.</p>
-      </div>
+    <div class="prob-card">
+      <div class="prob-bg-num">1</div>
+      <div class="prob-domain">Data Infrastructure &amp; Governance</div>
+      <p class="prob-q">"We have data scattered across spreadsheets, vendor feeds, and siloed systems with no single source of truth."</p>
+      <p class="prob-ev">
+        At <strong>FIRA</strong> (Mexico's national agricultural development trust), I replaced an institution's
+        ad-hoc Excel workflows with an automated, governed pipeline — integrating satellite vegetation indices,
+        climate risk models, and regulatory databases into credit decisions for agricultural producers.
+        Credit analysts adopted it without technical training.
+        Not because it was simple — because it was designed for them.
+        <br><br>
+        At <strong>D3Clarity</strong>, I built the analytics practice from scratch, adding MDM and
+        data lake infrastructure for international clients. <strong>Semarchy xDM certified</strong>
+        — MDM, Data Profiling, Data Lineage, Golden Records.
+      </p>
+      <span class="prob-ref">FIRA · D3Clarity · Semarchy xDM · AWS · PostgreSQL</span>
     </div>
 
-    <div class="fit-row">
-      <div class="fit-req">
-        <p>"Manage the model lifecycle: from ideation and data preparation to deployment and scaling on Cloud platforms using modern MLOps practices."</p>
-      </div>
-      <div class="fit-ev">
-        <span class="fit-ev-tag">FIRA · AWS · Azure ML</span>
-        <p>At <strong>FIRA</strong>: public source ingestion → geospatial validation → climate risk integration → governance protocols → Apache Superset dashboards. Stack: Python, PostgreSQL, Linux, AWS EC2, Azure ML, SageMaker. <strong>AWS Cloud Practitioner</strong> certified. Google Workspace administrator (own domain, independently configured) — platform selection by fit, not familiarity.</p>
-      </div>
+    <div class="prob-card">
+      <div class="prob-bg-num">2</div>
+      <div class="prob-domain">Unstructured Text &amp; NLP</div>
+      <p class="prob-q">"We have thousands of documents — meeting minutes, contracts, reports — and can't extract anything useful from them."</p>
+      <p class="prob-ev">
+        At <strong>D3Clarity</strong>, I built the full NLP pipeline: automated scraping of public
+        school board meeting minutes → ML topic classification → Power BI dashboard mapping
+        sales opportunities per district. Public records turned into a production commercial tool.
+        <br><br>
+        At <strong>BairesDev</strong>, a RAG and NLP pipeline made unstructured legal contracts
+        queryable — insight extraction per lawyer, per contract. My MSc thesis addressed
+        automatic text classification in <strong>2009</strong> — this work predates the LLM era.
+      </p>
+      <span class="prob-ref">D3Clarity · BairesDev · MSc ML/NLP · INAOE 2009</span>
     </div>
 
-    <div class="fit-row">
-      <div class="fit-req">
-        <p>"Translate data into actionable insights through data storytelling, empowering strategic decisions."</p>
-      </div>
-      <div class="fit-ev">
-        <span class="fit-ev-tag">FIRA · D3Clarity · Tec MTY</span>
-        <p>Dashboards built for non-technical credit analysts at <strong>FIRA</strong> — no training required for daily use. Executive KPI reporting at <strong>Punto Singular</strong>. Taught Tableau-based dashboarding to Business School students at <strong>Tec de Monterrey</strong>. Power BI · Tableau · Looker · Apache Superset.</p>
-      </div>
-    </div>
-
-    <div class="fit-row">
-      <div class="fit-req">
-        <p>"Contribute to building a strong data culture, ensuring quality, ethics, and compliance in every solution."</p>
-      </div>
-      <div class="fit-ev">
-        <span class="fit-ev-tag">FIRA · Semarchy xDM</span>
-        <p>Defined governance frameworks and quality protocols at <strong>FIRA</strong>. Incorporated environmental compliance layers into credit assessment. Led a mentorship program building the next generation of practitioners. <strong>Semarchy xDM certified</strong> — MDM, Data Profiling, Data Lineage, Golden Records.</p>
-      </div>
-    </div>
-
-    <div class="fit-row">
-      <div class="fit-req">
-        <p>"Degree in a quantitative field. Fluency in English. Italian is a plus."</p>
-      </div>
-      <div class="fit-ev">
-        <span class="fit-ev-tag">PhD · MSc · D3Clarity</span>
-        <p>PhD Candidate in Computer Physics · MSc Computer Science (ML/NLP) · BSc Physics & Mathematics. <strong>English: professional</strong> — 4+ years with US and European clients. <strong>Italian: basic-intermediate</strong> — ongoing private tutoring, native Spanish provides structural advantage for rapid progression.</p>
-      </div>
+    <div class="prob-card">
+      <div class="prob-bg-num">3</div>
+      <div class="prob-domain">ML to Production</div>
+      <p class="prob-q">"Our models work in notebooks. They don't work in the organization."</p>
+      <p class="prob-ev">
+        Four years at <strong>D3Clarity</strong>: every project followed PoC → production,
+        without exception. At <strong>CITEIM</strong>, Transformer-based models for continuous
+        sign language recognition — integrated with cloud services, real-time inference.
+        <br><br>
+        At the <strong>HAWC Observatory</strong>, distributed computing pipelines processed
+        petabyte-scale cosmic ray datasets across US and Mexican institutions.
+        The physics background is not incidental — it is where production-grade scientific
+        software is built under real constraints.
+      </p>
+      <span class="prob-ref">D3Clarity · CITEIM · HAWC · Azure ML · SageMaker</span>
     </div>
 
   </div>
 </section>
 
+
 <!-- ═══════════════════════════════════════════
-     CAREER ARC
+     02 — WORK HISTORY
 ═══════════════════════════════════════════ -->
-<section class="arc-section">
-  <div class="section-eyebrow">// career.trajectory()</div>
-  <h2 class="section-title">Twenty years. One through-line.</h2>
-  <p class="section-sub">Scientific rigor applied across an expanding surface area of domains and industries.</p>
+<section class="section work-section" id="s-work">
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Work history.</h2>
+    <span class="section-rule"></span>
+  </div>
 
-  <div class="arc">
+  <table class="work-table">
+    <tbody>
+      <tr>
+        <td class="td-period">2025 – 2026</td>
+        <td class="td-org">FIRA</td>
+        <td class="td-role">Data Scientist</td>
+        <td class="td-outcome">
+          Digital transformation of Mexico's national agricultural credit process.
+          Automated pipeline replacing manual workflows — satellite, climate, and regulatory
+          data integrated into repeatable, governed credit assessments.
+          <strong>Adopted by non-technical analysts without retraining.</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="td-period">2024 – 2025</td>
+        <td class="td-org">CITEIM</td>
+        <td class="td-role">Data Scientist</td>
+        <td class="td-outcome">
+          Transformer-based models for continuous sign language recognition.
+          Cloud-integrated real-time inference pipeline. Current-generation AI
+          applied to a direct human communication problem with social impact.
+        </td>
+      </tr>
+      <tr>
+        <td class="td-period">2023 – 2024</td>
+        <td class="td-org">BairesDev · Punto Singular</td>
+        <td class="td-role">Data Scientist &amp; Team Lead</td>
+        <td class="td-outcome">
+          KPI dashboards, streaming financial data on AWS (WebSocket pipelines).
+          Graph database modeling (Neo4j) for relationship analysis.
+          RAG + NLP pipeline for legal contract insight extraction.
+          Founded a mentorship program pairing students with nonprofits.
+        </td>
+      </tr>
+      <tr>
+        <td class="td-period">2019 – 2023</td>
+        <td class="td-org">D3Clarity</td>
+        <td class="td-role">Data Scientist</td>
+        <td class="td-outcome">
+          <strong>Built the analytics practice from scratch</strong> —
+          expanding the company's offering beyond MDM.
+          Four years: NLP pipelines, data lakes, ETL, forecasting models, MDM,
+          executive dashboards for international clients. Agile/Scrum with Jira.
+          Every project: PoC to production.
+        </td>
+      </tr>
+      <tr>
+        <td class="td-period">2004 – 2019</td>
+        <td class="td-org">HAWC · Tec MTY · UMSNH</td>
+        <td class="td-role">Researcher · Lecturer · Consultant</td>
+        <td class="td-outcome">
+          PhD candidate at the HAWC Observatory — petabyte-scale cosmic ray data,
+          distributed computing, Bayesian spectral analysis (14 co-authored publications).
+          Teaching at Tec de Monterrey. IT infrastructure and sysadmin at UMSNH.
+          Consulting across real estate, media, healthcare, education, and public sector.
+        </td>
+      </tr>
+      <tr>
+        <td class="td-period">2002</td>
+        <td class="td-org">CERN / U. Lausanne</td>
+        <td class="td-role">DAQ System Member</td>
+        <td class="td-outcome">
+          Data acquisition system for a Positron Emission Tomography scanner
+          (ClearPET project). Signal conversion and data handling at CERN,
+          under CONACYT-CERN cooperation. The benchmark for data precision
+          was set here.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
 
-    <div class="arc-item">
-      <div class="arc-dot"></div>
-      <div class="arc-period">Dec 2002 — CERN · University of Lausanne, Switzerland</div>
-      <div class="arc-role">DAQ System Member</div>
-      <div class="arc-org">CERN / University of Lausanne</div>
-      <div class="arc-note">First contact with large-scale scientific data processing. Signal conversion and data handling for a Positron Emission Tomography scanner project — at one of the world's foremost research facilities. The benchmark for data precision was set here.</div>
+
+<!-- ═══════════════════════════════════════════
+     03 — ACADEMIC FOUNDATION
+═══════════════════════════════════════════ -->
+<section class="section foundation-section" id="s-foundation">
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Academic foundation.</h2>
+    <span class="section-rule"></span>
+  </div>
+
+  <div class="foundation-grid">
+
+    <div>
+      <div class="col-label">Education</div>
+
+      <div class="edu-item">
+        <div class="edu-period">2009 – 2013</div>
+        <div class="edu-degree">PhD Candidate — Physics</div>
+        <div class="edu-school">UMSNH · HAWC Collaboration (Mexico / United States)</div>
+        <div class="edu-note">Cosmic ray composition analysis at petabyte scale. GPA 10.0. 14 co-authored publications. Multinational experiment spanning US and Mexican research institutions.</div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-period">2006 – 2009</div>
+        <div class="edu-degree">MSc — Computer Science (ML / NLP)</div>
+        <div class="edu-school">INAOE — National Institute of Astrophysics, Optics and Electronics</div>
+        <div class="edu-note">Thesis: "Automatic text classification using prototype-based class reduction." The foundation for every NLP engagement that followed — written in 2009, before the label existed.</div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-period">August 2009</div>
+        <div class="edu-degree">CERN School of Computing</div>
+        <div class="edu-school">Georg-August-Universität Göttingen · CERN CSC2009 · 6 ECTS</div>
+        <div class="edu-note">Scientific computing in high-energy physics. Distributed systems, advanced computational methods.</div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-period">1998 – 2003</div>
+        <div class="edu-degree">BSc — Physics &amp; Mathematics</div>
+        <div class="edu-school">Universidad Michoacana de San Nicolás de Hidalgo</div>
+        <div class="edu-note">Thesis: "Use of a pixel silicon detector in radiography." Data acquisition and signal processing at the instrumentation level — where most data quality problems originate.</div>
+      </div>
     </div>
 
-    <div class="arc-item">
-      <div class="arc-dot"></div>
-      <div class="arc-period">2004 — 2019 · Mexico · US collaboration</div>
-      <div class="arc-role">Researcher, Lecturer & Multi-Industry Consultant</div>
-      <div class="arc-org">HAWC Collaboration · Tec de Monterrey · UMSNH · 7 private clients</div>
-      <div class="arc-note">PhD candidate processing cosmic ray datasets at petabyte scale (HAWC: 14 co-authored publications, multinational experiment). Taught data and programming at university level. Consulted across real estate, media, healthcare, education, and public sector — building intuition for how different industries structure and consume data.</div>
-    </div>
+    <div>
+      <div class="col-label">Certifications</div>
 
-    <div class="arc-item">
-      <div class="arc-dot"></div>
-      <div class="arc-period">Feb 2019 — Mar 2023</div>
-      <div class="arc-role">Data Scientist</div>
-      <div class="arc-org">D3Clarity (formerly Viqtor Davis North America)</div>
-      <div class="arc-note">Hired to build the analytics practice from scratch — expanding the company's offering beyond MDM into data insights. Four years of end-to-end delivery: NLP pipelines, ETL, data lakes, MDM, forecasting models, and executive dashboards for international clients. Agile/Scrum · Jira · Azure ML · AWS · Power BI · Tableau.</div>
-    </div>
+      <div class="cert-item">
+        <span class="cert-mark">&#10003;</span>
+        <div>
+          <div class="cert-name">AWS Cloud Practitioner</div>
+          <div class="cert-detail">AWS Well-Architected Framework · Cloud infrastructure fundamentals · 2023</div>
+        </div>
+      </div>
 
-    <div class="arc-item">
-      <div class="arc-dot"></div>
-      <div class="arc-period">Sep 2023 — Aug 2024</div>
-      <div class="arc-role">Data Scientist & Team Lead</div>
-      <div class="arc-org">BairesDev · Punto Singular</div>
-      <div class="arc-note">KPI reporting and quality dashboards. Prototyped streaming financial data pipelines on AWS. Graph database modeling (Neo4j) for relationship analysis. Designed a RAG and NLP pipeline for a legal services client — contract insight extraction per lawyer, making unstructured legal text queryable. Founded a mentorship group: bachelor-level students solving real problems for nonprofits — data science with social responsibility as a design constraint.</div>
-    </div>
+      <div class="cert-item">
+        <span class="cert-mark">&#10003;</span>
+        <div>
+          <div class="cert-name">Semarchy xDM Certified</div>
+          <div class="cert-detail">Master Data Management · Data Profiling · Data Lineage · Golden Records · Governance · 2022</div>
+        </div>
+      </div>
 
-    <div class="arc-item">
-      <div class="arc-dot"></div>
-      <div class="arc-period">Oct 2024 — Jan 2025</div>
-      <div class="arc-role">Data Scientist</div>
-      <div class="arc-org">CITEIM Research Center</div>
-      <div class="arc-note">Transformer-based (LLM) models for continuous sign language recognition, integrating cloud services and pre-trained language models for real-time interpretation. Demonstrated that ML techniques developed in one domain translate directly to novel, high-impact problems.</div>
-    </div>
-
-    <div class="arc-item">
-      <div class="arc-dot"></div>
-      <div class="arc-period">Jan 2025 — Jan 2026</div>
-      <div class="arc-role">Data Scientist</div>
-      <div class="arc-org">FIRA — Agricultural Development Trust (Mexico)</div>
-      <div class="arc-note">Led full digital transformation: manual Excel workflows replaced by an automated, governed data pipeline. Integrated satellite vegetation health indices, climate risk models, and regulatory databases (protected zones) into credit assessment for agricultural producers. Outputs designed for non-technical credit analysts — zero technical training required for daily use.</div>
+      <div class="pub-block">
+        <div class="pub-count">14</div>
+        <p class="pub-text">
+          Co-authored publications — The HAWC Collaboration.
+          High-energy astrophysics. Peer-reviewed journals and
+          international conference proceedings (ICRC 2017, Busan, South Korea).
+          Personal publications: 3 ICRC proceedings + 1 national congress presentation.
+        </p>
+        <span class="pub-orcid">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 256 256" aria-hidden="true">
+            <path d="M256 128c0 70.7-57.3 128-128 128S0 198.7 0 128 57.3 0 128 0s128 57.3 128 128z" fill="#A6CE39"/>
+            <path d="M86.3 186.2H70.9V79.1h15.4v107.1zM108.9 79.1h41.6c39.6 0 57 28.3 57 53.6 0 27.5-21.5 53.6-56.8 53.6h-41.8V79.1zm15.4 93.3h24.5c34.9 0 42.9-26.5 42.9-39.7C191.7 111.2 178 93 148 93h-23.7v79.4z" fill="#fff"/>
+            <path d="M88.7 56.8c0 5.5-4.5 10.1-10.1 10.1s-10.1-4.6-10.1-10.1c0-5.6 4.5-10.1 10.1-10.1s10.1 4.5 10.1 10.1z" fill="#fff"/>
+          </svg>
+          ORCID profile available on request
+        </span>
+      </div>
     </div>
 
   </div>
 </section>
 
+
 <!-- ═══════════════════════════════════════════
-     SIGNATURE PROJECTS
+     04 — TECHNICAL CAPABILITIES
 ═══════════════════════════════════════════ -->
-<section class="projects-section">
-  <div class="section-eyebrow">// signature_work.highlight()</div>
-  <h2 class="section-title">Three proofs that started as PoCs.</h2>
-  <p class="section-sub" style="margin-bottom: 2.5rem;">Each one began with a focused hypothesis. Each scaled once value was demonstrated.</p>
-
-  <div class="projects-grid">
-
-    <div class="proj-card">
-      <div class="proj-bg-num">01</div>
-      <div class="proj-type">NLP · Sales Intelligence · D3Clarity</div>
-      <h4 class="proj-title">Public Records → Competitive Intelligence Dashboard</h4>
-      <p class="proj-desc">A client needed to sharpen their sales strategy for school district products across the US. School board meeting minutes are public record. I built the full pipeline: automated scraping → NLP processing → ML topic classification → Power BI dashboard mapping which products to pitch to each district based on what they are actively discussing at the board level. Public data transformed into a scalable commercial tool.</p>
-      <div class="proj-relevance"><strong>Key relevance:</strong> End-to-end ownership. Unstructured data → structured commercial insight. PoC → production. Business-facing output built for non-technical users.</div>
-    </div>
-
-    <div class="proj-card">
-      <div class="proj-bg-num">02</div>
-      <div class="proj-type">Geospatial · Digital Transformation · FIRA</div>
-      <h4 class="proj-title">Agricultural Credit: Excel to Governed Automated Pipeline</h4>
-      <p class="proj-desc">Replaced ad-hoc spreadsheet processes with an automated pipeline that integrates satellite-derived vegetation health indices, multi-source climate risk models, and regulatory databases (protected environmental zones). Credit analysts receive structured, repeatable reports — no manual data aggregation, no ad-hoc interpretation. Data governance protocols established across all source feeds.</p>
-      <div class="proj-relevance"><strong>Key relevance:</strong> Digital transformation. Multi-source data integration. Data culture built from scratch. Non-technical stakeholder adoption by design.</div>
-    </div>
-
-    <div class="proj-card">
-      <div class="proj-bg-num">03</div>
-      <div class="proj-type">Deep Learning · Cloud Services · CITEIM</div>
-      <h4 class="proj-title">Sign Language Recognition with Transformer Architectures</h4>
-      <p class="proj-desc">Designed and implemented Transformer-based models for continuous sign language recognition, integrating cloud services and pre-trained language models to enable real-time interpretation. Brought current-generation AI architectures to a problem with direct human communication impact — demonstrating that modern ML methods generalize across domains when the fundamentals are solid.</p>
-      <div class="proj-relevance"><strong>Key relevance:</strong> Current-generation AI (LLMs, Transformers). Cloud deployment. Full MLOps lifecycle. Research → applied production system.</div>
-    </div>
-
+<section class="section capabilities-section" id="s-capabilities">
+  <div class="section-head">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Technical capabilities.</h2>
+    <span class="section-rule"></span>
   </div>
-</section>
 
-<!-- ═══════════════════════════════════════════
-     TECH STACK
-═══════════════════════════════════════════ -->
-<section class="stack-section">
-  <div class="section-eyebrow">// tech_stack.inventory()</div>
-  <h2 class="section-title">Technical capabilities.</h2>
-  <p class="section-sub" style="margin-bottom: 2.5rem;">Tools are means, not ends — selected for fit, not for familiarity.</p>
+  <div class="cap-grid">
 
-  <div class="stack-grid">
-
-    <div class="stack-cat cat-ml" data-animate-bars>
-      <h4>Machine Learning &amp; AI</h4>
-      <div class="bar-row"><span class="bar-name">NLP / LLMs</span><div class="bar-track"><div class="bar-fill" data-w="92" style="--w:92%"></div></div></div>
-      <div class="bar-row"><span class="bar-name">Transformers</span><div class="bar-track"><div class="bar-fill" data-w="87" style="--w:87%"></div></div></div>
-      <div class="bar-row"><span class="bar-name">Classification</span><div class="bar-track"><div class="bar-fill" data-w="90" style="--w:90%"></div></div></div>
-      <div class="bar-row"><span class="bar-name">Forecasting</span><div class="bar-track"><div class="bar-fill" data-w="84" style="--w:84%"></div></div></div>
-      <div class="bar-row"><span class="bar-name">Geospatial ML</span><div class="bar-track"><div class="bar-fill" data-w="82" style="--w:82%"></div></div></div>
+    <div class="cap-group">
+      <h4>Core Languages</h4>
+      <div class="cap-tags">
+        <span class="cap-tag hi">Python</span>
+        <span class="cap-tag hi">SQL</span>
+        <span class="cap-tag">R</span>
+        <span class="cap-tag">Julia</span>
+        <span class="cap-tag">C / C++</span>
+        <span class="cap-tag">Java</span>
+        <span class="cap-tag">Shell</span>
+      </div>
     </div>
 
-    <div class="stack-cat cat-eng" data-animate-bars>
+    <div class="cap-group">
+      <h4>ML &amp; AI</h4>
+      <div class="cap-tags">
+        <span class="cap-tag hi">NLP / LLMs</span>
+        <span class="cap-tag hi">Transformers</span>
+        <span class="cap-tag">scikit-learn</span>
+        <span class="cap-tag">Geospatial ML</span>
+        <span class="cap-tag">Forecasting</span>
+        <span class="cap-tag">Classification</span>
+        <span class="cap-tag">RAG</span>
+        <span class="cap-tag">Gen AI</span>
+      </div>
+    </div>
+
+    <div class="cap-group">
       <h4>Data Engineering</h4>
-      <div class="bar-row"><span class="bar-name">Python</span><div class="bar-track"><div class="bar-fill" data-w="95" style="--w:95%"></div></div></div>
-      <div class="bar-row"><span class="bar-name">SQL</span><div class="bar-track"><div class="bar-fill" data-w="92" style="--w:92%"></div></div></div>
-      <div class="bar-row"><span class="bar-name">ETL / Pipelines</span><div class="bar-track"><div class="bar-fill" data-w="90" style="--w:90%"></div></div></div>
-      <div class="bar-row"><span class="bar-name">MDM / Governance</span><div class="bar-track"><div class="bar-fill" data-w="88" style="--w:88%"></div></div></div>
-      <div class="bar-row"><span class="bar-name">AWS · Azure · GCP</span><div class="bar-track"><div class="bar-fill" data-w="82" style="--w:82%"></div></div></div>
+      <div class="cap-tags">
+        <span class="cap-tag hi">ETL / Pipelines</span>
+        <span class="cap-tag hi">MDM / Governance</span>
+        <span class="cap-tag">PostgreSQL</span>
+        <span class="cap-tag">Neo4j</span>
+        <span class="cap-tag">Oracle / MySQL</span>
+        <span class="cap-tag">Linux / SysAdmin</span>
+        <span class="cap-tag">Git</span>
+      </div>
     </div>
 
-    <div class="stack-cat cat-viz" data-animate-bars>
-      <h4>Visualization &amp; Storytelling</h4>
-      <div class="bar-row"><span class="bar-name">Power BI</span><div class="bar-track"><div class="bar-fill" data-w="88" style="--w:88%"></div></div></div>
-      <div class="bar-row"><span class="bar-name">Tableau</span><div class="bar-track"><div class="bar-fill" data-w="88" style="--w:88%"></div></div></div>
-      <div class="bar-row"><span class="bar-name">Apache Superset</span><div class="bar-track"><div class="bar-fill" data-w="85" style="--w:85%"></div></div></div>
-      <div class="bar-row"><span class="bar-name">Data Literacy</span><div class="bar-track"><div class="bar-fill" data-w="90" style="--w:90%"></div></div></div>
+    <div class="cap-group">
+      <h4>Cloud &amp; MLOps</h4>
+      <div class="cap-tags">
+        <span class="cap-tag hi">AWS EC2 / SageMaker</span>
+        <span class="cap-tag hi">Azure ML</span>
+        <span class="cap-tag">GCP</span>
+        <span class="cap-tag">Agile / Scrum</span>
+        <span class="cap-tag">Jira</span>
+      </div>
     </div>
 
-    <div class="stack-cat cat-infra" data-animate-bars>
-      <h4>Infrastructure &amp; Methods</h4>
-      <div class="bar-row"><span class="bar-name">Linux / SysAdmin</span><div class="bar-track"><div class="bar-fill" data-w="92" style="--w:92%"></div></div></div>
-      <div class="bar-row"><span class="bar-name">Agile / Scrum</span><div class="bar-track"><div class="bar-fill" data-w="88" style="--w:88%"></div></div></div>
-      <div class="bar-row"><span class="bar-name">Team Leadership</span><div class="bar-track"><div class="bar-fill" data-w="87" style="--w:87%"></div></div></div>
-      <div class="bar-row"><span class="bar-name">Data Governance</span><div class="bar-track"><div class="bar-fill" data-w="88" style="--w:88%"></div></div></div>
+    <div class="cap-group">
+      <h4>Visualization</h4>
+      <div class="cap-tags">
+        <span class="cap-tag hi">Power BI</span>
+        <span class="cap-tag hi">Tableau</span>
+        <span class="cap-tag">Apache Superset</span>
+        <span class="cap-tag">Looker</span>
+        <span class="cap-tag">Airtable</span>
+      </div>
     </div>
 
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════
-     ALIGNMENT
-═══════════════════════════════════════════ -->
-<section class="alignment-section">
-  <div class="section-eyebrow">// alignment.check("values")</div>
-  <h2 class="section-title">Beyond the technical.</h2>
-  <p class="section-sub">Values, language, and context.</p>
-
-  <div class="align-grid">
-
-    <div class="align-col">
-      <h3>Values in practice.</h3>
-      <ul class="values-list">
-        <li>
-          <span class="val-marker">→</span>
-          <div>
-            <span class="val-label">Authenticity</span>
-            Proof of Concepts that demonstrate real value before committing to scale. No inflated claims — every output is auditable and every conclusion is traceable to the data.
-          </div>
-        </li>
-        <li>
-          <span class="val-marker">→</span>
-          <div>
-            <span class="val-label">Passion for Excellence</span>
-            Twenty years of problems that require precision: cosmic ray detection, regulatory credit compliance, sign language recognition at scale. The standard does not vary by domain or budget.
-          </div>
-        </li>
-        <li>
-          <span class="val-marker">→</span>
-          <div>
-            <span class="val-label">Responsibility</span>
-            Data governance and quality protocols designed as structural constraints, not afterthoughts. Environmental compliance layers in credit assessment. Ethics in data is a design input — not a checkbox. This extends to the field: a mentorship group where practitioners solve real problems for nonprofits, building the next generation with accountability as a design requirement.
-          </div>
-        </li>
-        <li>
-          <span class="val-marker">→</span>
-          <div>
-            <span class="val-label">Inventiveness</span>
-            Turned public school board minutes into a sales intelligence system. Brought ML into agricultural credit in Mexico. Applied Transformer architectures to human communication access. The discipline is constant; the applications keep expanding.
-          </div>
-        </li>
-      </ul>
-    </div>
-
-    <div class="align-col">
-      <h3>Languages &amp; readiness.</h3>
-      <ul class="lang-list" id="lang-list">
-        <li class="lang-item">
-          <div class="lang-top">
-            <span class="lang-name">Español</span>
-            <span class="lang-level">Native</span>
-          </div>
-          <div class="lang-track"><div class="lang-fill" data-w="100" style="--w:100%"></div></div>
-        </li>
-        <li class="lang-item">
-          <div class="lang-top">
-            <span class="lang-name">English</span>
-            <span class="lang-level">Professional</span>
-          </div>
-          <div class="lang-track"><div class="lang-fill" data-w="85" style="--w:85%"></div></div>
-          <div class="lang-note">International work with US and European clients across 4+ years at D3Clarity.</div>
-        </li>
-        <li class="lang-item">
-          <div class="lang-top">
-            <span class="lang-name">Italiano</span>
-            <span class="lang-level">Basic–Intermediate · In progress</span>
-          </div>
-          <div class="lang-track"><div class="lang-fill" data-w="40" style="--w:40%"></div></div>
-          <div class="lang-note">Ongoing private tutoring. Native Spanish provides structural advantage — grammar transfer accelerates progression. NLP-domain vocabulary in Italian is already navigable: a practical advantage at the intersection of data science and European markets.</div>
-        </li>
-        <li class="lang-item">
-          <div class="lang-top">
-            <span class="lang-name">Français</span>
-            <span class="lang-level">Basic</span>
-          </div>
-          <div class="lang-track"><div class="lang-fill" data-w="18" style="--w:18%"></div></div>
-        </li>
-      </ul>
-
-      <div class="reloc-box">
-        <div class="reloc-label">Relocation</div>
-        <p>Available to relocate. Open to international positions. Logistical transition is not a constraint.</p>
+    <div class="cap-group">
+      <h4>Methods</h4>
+      <div class="cap-tags">
+        <span class="cap-tag hi">Data Governance</span>
+        <span class="cap-tag">Data Literacy</span>
+        <span class="cap-tag">Bayesian Analysis</span>
+        <span class="cap-tag">HPC / Distributed</span>
+        <span class="cap-tag">Team Leadership</span>
+        <span class="cap-tag">Mentorship</span>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     CLOSING
-═══════════════════════════════════════════ -->
-<section class="closing-section">
-  <blockquote class="closing-quote">
-    "The source and format of the data change every time; the discipline does not."
-  </blockquote>
-  <div class="closing-contact">
-    <div class="closing-name">Juan de Dios Alvarez</div>
-    <div class="closing-line">Data Scientist</div>
-    <div class="closing-line">Morelia, Mexico</div>
-    <div class="closing-line" style="margin-top: 0.4rem; opacity: 0.45;">Contact available upon request</div>
-  </div>
-</section>
 
-<footer>
-  <span>Juan de Dios Alvarez · Data Scientist · 2026</span>
-  <span>data_story_v3_public.html</span>
+<!-- ═══════════════════════════════════════════
+     CLOSE — languages + contact
+═══════════════════════════════════════════ -->
+<div class="close-strip" id="s-close">
+  <div>
+    <div class="close-col-label">Languages</div>
+    <div class="lang-row">
+      <span class="lang-name-text">Spanish</span>
+      <span class="lang-level-text">Native</span>
+    </div>
+    <div class="lang-row">
+      <span class="lang-name-text">English</span>
+      <span class="lang-level-text">Professional &middot; 4+ yrs international</span>
+    </div>
+    <div class="lang-row">
+      <span class="lang-name-text">Italian</span>
+      <span class="lang-level-text">Basic–Intermediate &middot; In progress</span>
+    </div>
+    <div class="lang-row">
+      <span class="lang-name-text">French</span>
+      <span class="lang-level-text">Basic</span>
+    </div>
+    <p class="reloc-note">Available to relocate. Open to international positions. Logistical transition is not a constraint.</p>
+  </div>
+</div>
+
+
+<footer class="page-footer">
+  <span>Juan de Dios Alvarez · Data Practitioner · 2026</span>
+  <span>full_lifecycle · generic · v1</span>
 </footer>
+
+</div><!-- /page -->
 
 <script>
 (function () {
-
-  /* ── Screen: animate KPI counters when scrolled into view ── */
-  function runCounter(el) {
-    if (el.hasAttribute('data-static')) return;
-    var target = parseInt(el.dataset.target, 10);
-    var suffix = el.dataset.suffix || '';
-    var duration = 1500;
-    var start = performance.now();
-    function tick(now) {
-      var t = Math.min((now - start) / duration, 1);
-      var ease = 1 - Math.pow(1 - t, 3);
-      el.textContent = Math.round(ease * target) + suffix;
-      if (t < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-
-  /* ── Screen: animate bar widths when scrolled into view ── */
-  function runBars(container) {
-    container.querySelectorAll('.bar-fill[data-w]').forEach(function (el) {
-      el.style.width = el.dataset.w + '%';
-    });
-    container.querySelectorAll('.lang-fill[data-w]').forEach(function (el) {
-      el.style.width = el.dataset.w + '%';
-    });
-  }
-
   var io = new IntersectionObserver(function (entries, obs) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      var el = entry.target;
-      if (el.id === 'kpi-strip') {
-        el.querySelectorAll('[data-target]').forEach(runCounter);
-      }
-      if (el.hasAttribute('data-animate-bars')) { runBars(el); }
-      if (el.id === 'lang-list') { runBars(el); }
-      obs.unobserve(el);
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('visible');
+      obs.unobserve(e.target);
     });
-  }, { threshold: 0.25 });
+  }, { threshold: 0.08 });
 
-  document.querySelectorAll('#kpi-strip, [data-animate-bars], #lang-list')
+  document.querySelectorAll('.section, .close-strip')
     .forEach(function (el) { io.observe(el); });
-
-  /* ── Print: resolve all animated values before dialog renders ──
-     The beforeprint event fires before the browser generates the
-     print layout. Setting values here ensures counters and bars
-     display their final state regardless of scroll position.
-  ── */
-  function resolveForPrint() {
-    /* KPI counters */
-    document.querySelectorAll('[data-target]').forEach(function (el) {
-      el.textContent = el.dataset.target + (el.dataset.suffix || '');
-    });
-    /* Bar and language fills (belt-and-suspenders alongside CSS --w) */
-    document.querySelectorAll('.bar-fill[data-w], .lang-fill[data-w]').forEach(function (el) {
-      el.style.width = el.dataset.w + '%';
-    });
-  }
-
-  window.addEventListener('beforeprint', resolveForPrint);
-
-  /* matchMedia fallback for browsers that fire onbeforeprint late */
-  if (window.matchMedia) {
-    var mq = window.matchMedia('print');
-    mq.addEventListener('change', function (e) {
-      if (e.matches) resolveForPrint();
-    });
-  }
-
 })();
 </script>
 
