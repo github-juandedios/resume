@@ -637,6 +637,17 @@ body {
   letter-spacing: 0.06em;
 }
 
+.page-footer a {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.54rem;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.page-footer a:hover { color: var(--ink); }
+
 /* ═══════════════════════════════════════
    ANIMATIONS
 ═══════════════════════════════════════ */
@@ -705,7 +716,7 @@ body {
 
   <div class="mast-body">
     <p class="mast-bio" data-i18n="mast-bio">
-      I build what the data team does not yet have — the pipeline that replaces the spreadsheet,
+      I build what the organization does not yet have in data — the pipeline that replaces the spreadsheet,
       the model that goes beyond the notebook, the dashboard that needs no user manual.
       Twenty years across <strong>particle physics, NLP, geospatial analysis, agricultural finance,
       healthcare, education, and media</strong>: different domains, the same discipline.
@@ -771,7 +782,7 @@ body {
         <br><br>
         At <strong>BairesDev</strong>, a RAG and NLP pipeline made unstructured legal contracts
         queryable — insight extraction per lawyer, per contract. My MSc thesis addressed
-        automatic text classification in <strong>2009</strong> — this work predates the LLM era.
+        automatic text classification in <strong>2009</strong>.
       </p>
       <span class="prob-ref" data-i18n="prob2-ref">D3Clarity · BairesDev · MSc ML/NLP · INAOE 2009</span>
     </div>
@@ -781,7 +792,7 @@ body {
       <div class="prob-domain" data-i18n="prob3-domain">ML to Production</div>
       <p class="prob-q" data-i18n="prob3-q">&ldquo;Our models work in notebooks. They don't work in the organization.&rdquo;</p>
       <p class="prob-ev" data-i18n="prob3-ev">
-        Four years at <strong>D3Clarity</strong>: every project followed PoC → production,
+        Four years at <strong>D3Clarity</strong>: every project followed pilot to production,
         without exception. At <strong>CITEIM</strong>, Transformer-based models for continuous
         sign language recognition — fully local inference pipeline, on-device. No cloud dependency by design.
         <br><br>
@@ -864,29 +875,37 @@ body {
           expanding the company's offering beyond MDM.
           Four years: NLP pipelines, data lakes, ETL, forecasting models, MDM,
           executive dashboards for international clients. Agile/Scrum with Jira.
-          Every project: PoC to production.
+          Every project: pilot to production.
+        </td>
+      </tr>
+      <tr>
+        <td class="td-period">2009 – 2013</td>
+        <td class="td-org">HAWC Observatory</td>
+        <td class="td-role" data-i18n="work-hawc-role">Doctoral Researcher</td>
+        <td class="td-outcome" data-i18n="work-hawc">
+          Doctoral research at the HAWC Observatory — petabyte-scale cosmic ray data,
+          distributed computing, Bayesian spectral analysis. Peer-reviewed publications
+          as HAWC Collaboration member. Multinational experiment spanning US and Mexican
+          research institutions.
         </td>
       </tr>
       <tr>
         <td class="td-period">2004 – 2019</td>
-        <td class="td-org">HAWC · Tec MTY · UMSNH</td>
-        <td class="td-role" data-i18n="work-hawc-role">Researcher · Lecturer · Consultant</td>
-        <td class="td-outcome" data-i18n="work-hawc">
-          PhD candidate at the HAWC Observatory — petabyte-scale cosmic ray data,
-          distributed computing, Bayesian spectral analysis (14 co-authored publications).
-          Teaching at Tec de Monterrey. IT infrastructure and sysadmin at UMSNH.
+        <td class="td-org">Tec MTY · UMSNH</td>
+        <td class="td-role" data-i18n="work-acad-role">Lecturer &amp; Consultant</td>
+        <td class="td-outcome" data-i18n="work-acad">
+          Teaching at Tec de Monterrey. IT infrastructure and systems administration at UMSNH.
           Consulting across real estate, media, healthcare, education, and public sector.
         </td>
       </tr>
       <tr>
         <td class="td-period">2002</td>
         <td class="td-org">CERN / U. Lausanne</td>
-        <td class="td-role" data-i18n="work-cern-role">DAQ System Member</td>
+        <td class="td-role" data-i18n="work-cern-role">Research Engineer</td>
         <td class="td-outcome" data-i18n="work-cern">
           Data acquisition system for a Positron Emission Tomography scanner
           (ClearPET project). Signal conversion and data handling at CERN,
-          under CONACYT-CERN cooperation. The benchmark for data precision
-          was set here.
+          under CONACYT-CERN cooperation.
         </td>
       </tr>
     </tbody>
@@ -911,9 +930,9 @@ body {
 
       <div class="edu-item">
         <div class="edu-period">2009 – 2013</div>
-        <div class="edu-degree" data-i18n="edu-phd-degree">PhD Candidate — Physics</div>
+        <div class="edu-degree" data-i18n="edu-phd-degree">Doctoral Studies — Physics (research completed)</div>
         <div class="edu-school" data-i18n="edu-phd-school">UMSNH · HAWC Collaboration (Mexico / United States)</div>
-        <div class="edu-note" data-i18n="edu-phd-note">Cosmic ray composition analysis at petabyte scale. GPA 10.0. 14 co-authored publications. Multinational experiment spanning US and Mexican research institutions.</div>
+        <div class="edu-note" data-i18n="edu-phd-note">Cosmic ray composition analysis at petabyte scale. GPA 10.0. Peer-reviewed publications as HAWC Collaboration member. Multinational experiment spanning US and Mexican research institutions.</div>
       </div>
 
       <div class="edu-item">
@@ -926,7 +945,7 @@ body {
       <div class="edu-item">
         <div class="edu-period">August 2009</div>
         <div class="edu-degree" data-i18n="edu-cern-degree">CERN School of Computing</div>
-        <div class="edu-school" data-i18n="edu-cern-school">Georg-August-Universität Göttingen · CERN CSC2009 · 6 ECTS</div>
+        <div class="edu-school" data-i18n="edu-cern-school">Georg-August-Universität Göttingen · CERN CSC2009</div>
         <div class="edu-note" data-i18n="edu-cern-note">Scientific computing in high-energy physics. Distributed systems, advanced computational methods.</div>
       </div>
 
@@ -1059,8 +1078,8 @@ body {
       <div class="cap-tags">
         <span class="cap-tag hi" data-i18n="tag-data-gov">Data Governance</span>
         <span class="cap-tag" data-i18n="tag-data-lit">Data Literacy</span>
-        <span class="cap-tag" data-i18n="tag-bayesian">Bayesian Analysis</span>
-        <span class="cap-tag" data-i18n="tag-hpc">HPC / Distributed</span>
+        <span class="cap-tag" data-i18n="tag-bayesian">Statistical Modeling</span>
+        <span class="cap-tag" data-i18n="tag-hpc">Large-scale Data Processing</span>
         <span class="cap-tag" data-i18n="tag-leadership">Team Leadership</span>
         <span class="cap-tag" data-i18n="tag-mentorship">Mentorship</span>
       </div>
@@ -1099,7 +1118,7 @@ body {
 
 <footer class="page-footer">
   <span data-i18n="footer-main">Juan de Dios Alvarez · Data Practitioner · 2026</span>
-  <span data-i18n="footer-meta">full_lifecycle · generic · v1</span>
+  <a href="https://www.linkedin.com/in/juandedios-info/" target="_blank" rel="noopener">linkedin.com/in/juandedios-info</a>
 </footer>
 
 </div><!-- /page -->
@@ -1111,7 +1130,7 @@ body {
   var es = {
     'mast-label':        'Profesional de Datos · Ciclo Completo',
     'mast-roles':        'Científico de Datos &nbsp;&middot;&nbsp; Ingeniero de Datos &nbsp;&middot;&nbsp; Analista Geoespacial &nbsp;&middot;&nbsp; ML Practitioner',
-    'mast-bio':          'Construyo lo que el equipo de datos aún no tiene — el pipeline que reemplaza la hoja de cálculo, el modelo que va más allá del notebook, el dashboard que no necesita manual de usuario. Veinte años en <strong>física de partículas, PLN, análisis geoespacial, finanzas agrícolas, salud, educación y medios</strong>: dominios distintos, la misma disciplina. Calidad primero. Salidas accesibles. Valor demostrable antes del escalamiento.',
+    'mast-bio':          'Construyo lo que la organización aún no tiene en datos — el pipeline que reemplaza la hoja de cálculo, el modelo que va más allá del notebook, el dashboard que no necesita manual de usuario. Veinte años en <strong>física de partículas, PLN, análisis geoespacial, finanzas agrícolas, salud, educación y medios</strong>: dominios distintos, la misma disciplina. Calidad primero. Salidas accesibles. Valor demostrable antes del escalamiento.',
 
     'metric-years':      'Años con datos',
     'metric-industries': 'Industrias',
@@ -1123,11 +1142,11 @@ body {
     'prob1-ev':          'En <strong>FIRA</strong> (fideicomiso nacional de desarrollo agrícola de México), reemplacé los flujos ad hoc en Excel de una institución con un pipeline automatizado y gobernado — integrando índices de vegetación satelital, modelos de riesgo climático y bases regulatorias en las decisiones de crédito para productores agrícolas. Los analistas lo adoptaron sin capacitación técnica. No porque fuera simple — sino porque fue diseñado para ellos.<br><br>En <strong>D3Clarity</strong>, construí la práctica analítica desde cero, incorporando infraestructura MDM y data lake para clientes internacionales. <strong>Certificado Semarchy xDM</strong> — MDM, Perfilado de Datos, Linaje, Registros Dorados.',
     'prob2-domain':      'Texto No Estructurado y PLN',
     'prob2-q':           '&ldquo;Tenemos miles de documentos — actas, contratos, reportes — y no podemos extraer nada útil de ellos.&rdquo;',
-    'prob2-ev':          'En <strong>D3Clarity</strong>, construí el pipeline completo de PLN: scraping automatizado de actas públicas de juntas escolares → clasificación de temas con ML → dashboard en Power BI mapeando oportunidades de venta por distrito. Registros públicos convertidos en una herramienta comercial de producción.<br><br>En <strong>BairesDev</strong>, un pipeline RAG y PLN hizo consultables contratos legales no estructurados — extracción de información por abogado, por contrato. Mi tesis de maestría abordó la clasificación automática de texto en <strong>2009</strong> — este trabajo antecede a la era LLM.',
+    'prob2-ev':          'En <strong>D3Clarity</strong>, construí el pipeline completo de PLN: scraping automatizado de actas públicas de juntas escolares → clasificación de temas con ML → dashboard en Power BI mapeando oportunidades de venta por distrito. Registros públicos convertidos en una herramienta comercial de producción.<br><br>En <strong>BairesDev</strong>, un pipeline RAG y PLN hizo consultables contratos legales no estructurados — extracción de información por abogado, por contrato. Mi tesis de maestría abordó la clasificación automática de texto en <strong>2009</strong>.',
     'prob2-ref':         'D3Clarity · BairesDev · Maestría ML/PLN · INAOE 2009',
     'prob3-domain':      'ML a Producción',
     'prob3-q':           '&ldquo;Nuestros modelos funcionan en notebooks. No funcionan en la organización.&rdquo;',
-    'prob3-ev':          'Cuatro años en <strong>D3Clarity</strong>: cada proyecto siguió el camino PoC → producción, sin excepción. En <strong>CITEIM</strong>, modelos basados en Transformer para reconocimiento continuo de lengua de señas — pipeline de inferencia totalmente local, en dispositivo. Sin dependencia de nube por diseño.<br><br>En el <strong>Observatorio HAWC</strong>, los pipelines de computación distribuida procesaron petabytes de datos de rayos cósmicos entre instituciones de México y EE. UU. El contexto de física no es incidental — es donde el software científico de grado de producción se construye bajo restricciones reales.',
+    'prob3-ev':          'Cuatro años en <strong>D3Clarity</strong>: cada proyecto siguió el camino de piloto a producción, sin excepción. En <strong>CITEIM</strong>, modelos basados en Transformer para reconocimiento continuo de lengua de señas — pipeline de inferencia totalmente local, en dispositivo. Sin dependencia de nube por diseño.<br><br>En el <strong>Observatorio HAWC</strong>, los pipelines de computación distribuida procesaron petabytes de datos de rayos cósmicos entre instituciones de México y EE. UU. El contexto de física no es incidental — es donde el software científico de grado de producción se construye bajo restricciones reales.',
 
     'title-work':        'Historial laboral.',
     'work-fira-role':    'Científico de Datos',
@@ -1139,23 +1158,25 @@ body {
     'work-bairesdev-role': 'Científico de Datos',
     'work-bairesdev':    'Modelado con base de datos de grafos (Neo4j) para análisis de relaciones. Sumarización de texto con Transformers. <strong>Pipeline RAG + PLN para contratos legales</strong> — extracción de cláusulas, mapeo de obligaciones, consulta por portafolio de cada abogado. Curación de datos con AirTable.',
     'work-d3clarity-role': 'Científico de Datos',
-    'work-d3clarity':    '<strong>Construyó la práctica analítica desde cero</strong> — expandiendo la oferta de la empresa más allá del MDM. Cuatro años: pipelines PLN, data lakes, ETL, modelos de pronóstico, MDM, dashboards ejecutivos para clientes internacionales. Agile/Scrum con Jira. Cada proyecto: de PoC a producción.',
-    'work-hawc-role':    'Investigador · Docente · Consultor',
-    'work-hawc':         'PhD candidato en el Observatorio HAWC — datos de rayos cósmicos a escala de petabytes, computación distribuida, análisis espectral bayesiano (14 publicaciones co-autoradas). Docencia en Tec de Monterrey. Infraestructura TI y sysadmin en la UMSNH. Consultoría en bienes raíces, medios, salud, educación y sector público.',
-    'work-cern-role':    'Miembro del Sistema DAQ',
-    'work-cern':         'Sistema de adquisición de datos para un escáner de Tomografía por Emisión de Positrones (proyecto ClearPET). Conversión de señales y manejo de datos en CERN, bajo cooperación CONACYT-CERN. El estándar para la precisión en datos se estableció aquí.',
+    'work-d3clarity':    '<strong>Construyó la práctica analítica desde cero</strong> — expandiendo la oferta de la empresa más allá del MDM. Cuatro años: pipelines PLN, data lakes, ETL, modelos de pronóstico, MDM, dashboards ejecutivos para clientes internacionales. Agile/Scrum con Jira. Cada proyecto: de piloto a producción.',
+    'work-hawc-role':    'Investigador Doctoral',
+    'work-hawc':         'Investigación doctoral en el Observatorio HAWC — datos de rayos cósmicos a escala de petabytes, computación distribuida, análisis espectral bayesiano. Publicaciones revisadas por pares como miembro de la Colaboración HAWC. Experimento multinacional en instituciones de México y EE. UU.',
+    'work-acad-role':    'Docente y Consultor',
+    'work-acad':         'Docencia en Tec de Monterrey. Infraestructura TI y administración de sistemas en la UMSNH. Consultoría en bienes raíces, medios, salud, educación y sector público.',
+    'work-cern-role':    'Ingeniero de Investigación',
+    'work-cern':         'Sistema de adquisición de datos para un escáner de Tomografía por Emisión de Positrones (proyecto ClearPET). Conversión de señales y manejo de datos en CERN, bajo cooperación CONACYT-CERN.',
 
     'title-foundation':  'Formación académica.',
     'col-education':     'Educación',
     'col-certs':         'Certificaciones',
-    'edu-phd-degree':    'PhD Candidato — Física',
+    'edu-phd-degree':    'Estudios Doctorales — Física (investigación completada)',
     'edu-phd-school':    'UMSNH · Colaboración HAWC (México / Estados Unidos)',
-    'edu-phd-note':      'Análisis de composición de rayos cósmicos a escala de petabytes. Promedio 10.0. 14 publicaciones co-autoradas. Experimento multinacional en instituciones de México y EE. UU.',
+    'edu-phd-note':      'Análisis de composición de rayos cósmicos a escala de petabytes. Promedio 10.0. Publicaciones revisadas por pares como miembro de la Colaboración HAWC. Experimento multinacional en instituciones de México y EE. UU.',
     'edu-msc-degree':    'Maestría — Ciencias Computacionales (ML / PLN)',
     'edu-msc-school':    'INAOE — Instituto Nacional de Astrofísica, Óptica y Electrónica',
     'edu-msc-note':      'Tesis: &ldquo;Clasificación automática de texto mediante reducción de clase basada en prototipos.&rdquo; La base de cada proyecto PLN posterior — escrito en 2009, antes de que existiera la etiqueta.',
     'edu-cern-degree':   'Escuela de Computación del CERN',
-    'edu-cern-school':   'Georg-August-Universität Göttingen · CERN CSC2009 · 6 ECTS',
+    'edu-cern-school':   'Georg-August-Universität Göttingen · CERN CSC2009',
     'edu-cern-note':     'Computación científica en física de altas energías. Sistemas distribuidos, métodos computacionales avanzados.',
     'edu-bsc-degree':    'Licenciatura — Físico Matemáticas',
     'edu-bsc-school':    'Universidad Michoacana de San Nicolás de Hidalgo',
@@ -1178,8 +1199,8 @@ body {
     'tag-classification':'Clasificación',
     'tag-data-gov':      'Gobernanza de Datos',
     'tag-data-lit':      'Alfabetización en Datos',
-    'tag-bayesian':      'Análisis Bayesiano',
-    'tag-hpc':           'HPC / Distribuido',
+    'tag-bayesian':      'Modelado Estadístico',
+    'tag-hpc':           'Procesamiento a Gran Escala',
     'tag-leadership':    'Liderazgo de Equipo',
     'tag-mentorship':    'Mentoría',
 
@@ -1190,8 +1211,7 @@ body {
     'lang-french-level': 'Básico',
     'reloc-note':        'Disponible para reubicación. Abierto a posiciones internacionales. La transición logística no es un obstáculo.',
 
-    'footer-main':       'Juan de Dios Alvarez · Profesional de Datos · 2026',
-    'footer-meta':       'ciclo_completo · genérico · v1'
+    'footer-main':       'Juan de Dios Alvarez · Profesional de Datos · 2026'
   };
 
   /* ─── ENGLISH CACHE ─── populated on first toggle */
