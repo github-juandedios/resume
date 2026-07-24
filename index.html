@@ -3,590 +3,384 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Juan de Dios Alvarez · Data Practitioner</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<title>Juan de Dios Alvarez</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Newsreader:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 
-/* ─── PALETTE ─── warm editorial: cream + deep warm ink + rust accent */
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
 :root {
-  --ink:     #1a1208;   /* deep warm brown-black   */
-  --paper:   #f7f3ed;   /* warm cream               */
-  --accent:  #9a3412;   /* rust / burnt sienna      */
-  --muted:   #7a6f65;   /* warm stone               */
-  --light:   #ddd5c9;   /* warm divider             */
-  --rule:    #c4b8ac;   /* hairline rule            */
-  --surface: #ede8e1;   /* warm card fill           */
+  --bone:    #f2eee6;
+  --umber:   #231c16;
+  --ochre:   #b8823c;
+  --raw:     #a69b8c;
+  --rule:    #ddd3c4;
+  --surface: #e9e2d4;
+
+  --ground: var(--bone);
+  --ink:    var(--umber);
+  --accent: var(--ochre);
+  --muted:  var(--raw);
+  --line:   var(--rule);
+  --panel:  var(--surface);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground: #1c1712;
+    --ink:    #ece5d8;
+    --accent: #d4a057;
+    --muted:  #8c8175;
+    --line:   #3a3128;
+    --panel:  #262019;
+  }
+}
+
+:root[data-theme="dark"] {
+  --ground: #1c1712;
+  --ink:    #ece5d8;
+  --accent: #d4a057;
+  --muted:  #8c8175;
+  --line:   #3a3128;
+  --panel:  #262019;
+}
+
+:root[data-theme="light"] {
+  --ground: var(--bone);
+  --ink:    var(--umber);
+  --accent: var(--ochre);
+  --muted:  var(--raw);
+  --line:   var(--rule);
+  --panel:  var(--surface);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+html { -webkit-text-size-adjust: 100%; }
+
 body {
-  font-family: 'Crimson Pro', Georgia, serif;
-  background: var(--paper);
+  font-family: 'Newsreader', Georgia, serif;
+  background: var(--ground);
   color: var(--ink);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* ─── LAYOUT ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+a { color: inherit; }
+
 .page {
-  max-width: 1020px;
+  max-width: 720px;
   margin: 0 auto;
-  padding: 3.5rem 3.5rem;
+  padding: 4rem 2rem 5rem;
 }
 
 /* ═══════════════════════════════════════
-   MASTHEAD
+   UTILITY LABELS
 ═══════════════════════════════════════ */
-.masthead {
-  border-top: 3px solid var(--ink);
-  padding-top: 1.6rem;
-  margin-bottom: 0;
+.mono {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.mast-eyeline {
+/* ═══════════════════════════════════════
+   TOP BAR
+═══════════════════════════════════════ */
+.topbar {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 1rem;
-}
-
-.mast-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
+  margin-bottom: 3.5rem;
+  font-size: 0.68rem;
   color: var(--muted);
 }
 
-.mast-eyeline-right {
+.topbar .site-id { letter-spacing: 0.14em; }
+
+.toggles {
   display: flex;
   align-items: baseline;
+  gap: 1.1rem;
+}
+
+.lang-toggle, .theme-toggle {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.opt {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s;
+  color: var(--muted);
+  background: none;
+  border: none;
+  font: inherit;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  padding: 0;
+}
+
+.opt.active { color: var(--ink); }
+.opt:hover:not(.active) { color: var(--accent); }
+.opt:focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
+.sep { color: var(--line); }
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero {
+  margin-bottom: 4.5rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.68rem;
+  color: var(--muted);
+  margin-bottom: 1.4rem;
+  opacity: 0;
+  animation: rise 0.6s ease-out 0.1s forwards;
+}
+
+.hero h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  margin-bottom: 1.6rem;
+  opacity: 0;
+  animation: rise 0.65s ease-out 0.22s forwards;
+}
+
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.hero h1 .resolve {
+  color: var(--accent);
+  font-weight: 500;
+  font-style: normal;
+}
+
+.hero-sub {
+  font-size: 1.08rem;
+  font-weight: 300;
+  color: var(--ink);
+  max-width: 34rem;
+  opacity: 0;
+  animation: rise 0.65s ease-out 0.34s forwards;
+}
+
+.hero-sub strong {
+  font-weight: 500;
+  color: var(--accent);
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════
+   SECTION SHELL
+═══════════════════════════════════════ */
+.section {
+  padding-top: 3rem;
+  border-top: 1px solid var(--line);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.section.visible { opacity: 1; transform: none; }
+
+.section-label {
+  font-size: 0.64rem;
+  color: var(--muted);
+  margin-bottom: 1.6rem;
+}
+
+/* ═══════════════════════════════════════
+   TRANSLATION PAIRS
+═══════════════════════════════════════ */
+.pairs {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pair {
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  gap: 0 1.2rem;
+}
+
+.pair:last-child { border-bottom: none; }
+
+.pair-index {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--line);
+  padding-top: 0.3rem;
+}
+
+.pair-body { min-width: 0; }
+
+.pair-raw {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.18rem;
+  line-height: 1.5;
+  color: var(--muted);
+  text-wrap: balance;
+  margin-bottom: 0.7rem;
+}
+
+.pair-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0 0.7rem;
+}
+
+.pair-arrow .track {
+  height: 1px;
+  width: 2.2rem;
+  background: var(--line);
+  position: relative;
+  overflow: visible;
+}
+
+.pair-arrow .track::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-right: 1px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.pair-arrow .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.pair-resolved {
+  font-size: 1.14rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.pair-resolved strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════
+   HOW / PRINCIPLES
+═══════════════════════════════════════ */
+.principles {
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 1.6rem;
 }
 
-.mast-url {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.6rem;
-  color: var(--rule);
-  letter-spacing: 0.06em;
-}
-
-/* ─── LANGUAGE TOGGLE ─── */
-.lang-toggle {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.35rem;
-}
-
-.lt-sep {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.6rem;
-  color: var(--rule);
-}
-
-.lt-opt {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--rule);
-  cursor: pointer;
-  transition: color 0.15s;
-  user-select: none;
-}
-
-.lt-opt.active {
-  color: var(--ink);
-}
-
-.lt-opt:hover:not(.active) {
-  color: var(--muted);
-}
-
-.mast-name {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
-  line-height: 0.95;
-  letter-spacing: -0.025em;
-  margin-bottom: 0.6rem;
-  opacity: 0;
-  animation: fadeIn 0.7s ease-out 0.1s forwards;
-}
-
-.mast-roles {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--muted);
-  margin-bottom: 2rem;
-  opacity: 0;
-  animation: fadeIn 0.7s ease-out 0.3s forwards;
-}
-
-/* two-column body: bio left, metrics right */
-.mast-body {
+.principle {
   display: grid;
-  grid-template-columns: 1fr 210px;
-  gap: 0;
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-  margin-bottom: 1.2rem;
-  opacity: 0;
-  animation: fadeIn 0.7s ease-out 0.5s forwards;
+  grid-template-columns: 9rem 1fr;
+  gap: 1.4rem;
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid var(--line);
 }
 
-.mast-bio {
-  padding: 1.5rem 2.5rem 1.5rem 0;
-  font-size: 1.06rem;
-  line-height: 1.8;
+.principle:last-child { border-bottom: none; padding-bottom: 0; }
+
+.principle-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-top: 0.2rem;
+}
+
+.principle-text {
+  font-size: 0.98rem;
   font-weight: 300;
-  border-right: 1px solid var(--rule);
-}
-
-.mast-bio strong {
-  font-weight: 600;
-  color: var(--accent);
-}
-
-.mast-metrics {
-  padding: 1.5rem 0 1.5rem 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.metric { }
-
-.metric-value {
-  font-family: 'DM Serif Display', serif;
-  font-size: 2rem;
-  line-height: 1;
-  color: var(--accent);
-  display: block;
-}
-
-.metric:nth-child(2) .metric-value,
-.metric:nth-child(3) .metric-value { color: var(--ink); }
-.metric:nth-child(4) .metric-value { color: var(--muted); }
-
-.metric-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.54rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-
-/* ═══════════════════════════════════════
-   SECTIONS — shared
-═══════════════════════════════════════ */
-.section {
-  padding-top: 2.5rem;
-  margin-bottom: 0;
-  border-top: 1px solid var(--rule);
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
-}
-
-.section.visible {
-  opacity: 1;
-  transform: none;
-}
-
-.section-head {
-  display: flex;
-  align-items: baseline;
-  gap: 0.9rem;
-  margin-bottom: 1.8rem;
-}
-
-.section-num {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.6rem;
-  color: var(--accent);
-  letter-spacing: 0.1em;
-  opacity: 0.7;
-  flex-shrink: 0;
-}
-
-.section-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.55rem;
-  line-height: 1;
-  color: var(--ink);
-}
-
-.section-rule {
-  flex: 1;
-  height: 1px;
-  background: var(--rule);
-  margin-left: 0.5rem;
-}
-
-/* ═══════════════════════════════════════
-   01 · THREE PROBLEMS
-═══════════════════════════════════════ */
-.problems-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border: 1px solid var(--light);
-  background: var(--light);
-  gap: 1px;
-}
-
-.prob-card {
-  background: var(--paper);
-  padding: 2rem 1.8rem 1.8rem;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.prob-card::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--light);
-}
-
-.prob-card:nth-child(1)::after { background: var(--accent); }
-.prob-card:nth-child(2)::after { background: var(--ink); }
-.prob-card:nth-child(3)::after { background: var(--muted); }
-
-.prob-bg-num {
-  font-family: 'DM Serif Display', serif;
-  font-size: 5.5rem;
-  line-height: 1;
-  color: var(--light);
-  position: absolute;
-  top: 0.1rem; right: 0.7rem;
-  pointer-events: none;
-  user-select: none;
-}
-
-.prob-domain {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.56rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--accent);
-  margin-bottom: 1rem;
-}
-
-.prob-card:nth-child(2) .prob-domain { color: var(--ink); }
-.prob-card:nth-child(3) .prob-domain { color: var(--muted); }
-
-.prob-q {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.08rem;
-  font-style: italic;
-  line-height: 1.5;
-  color: var(--ink);
-  margin-bottom: 1.2rem;
-  padding-bottom: 1.1rem;
-  border-bottom: 1px solid var(--light);
-  flex-shrink: 0;
-}
-
-.prob-ev {
-  font-size: 0.87rem;
   line-height: 1.7;
-  color: var(--muted);
-  font-weight: 300;
-  flex: 1;
-  margin-bottom: 1.2rem;
-}
-
-.prob-ev strong { color: var(--ink); font-weight: 600; }
-
-.prob-ref {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.56rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--rule);
-  margin-top: auto;
-  padding-top: 0.9rem;
-  border-top: 1px dashed var(--light);
-}
-
-/* ═══════════════════════════════════════
-   02 · WORK HISTORY
-═══════════════════════════════════════ */
-.work-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.work-table tbody tr {
-  border-bottom: 1px solid var(--light);
-  transition: background 0.15s;
-}
-
-.work-table tbody tr:last-child { border-bottom: none; }
-.work-table tbody tr:hover { background: var(--surface); }
-
-.work-table td {
-  padding: 1rem 0.8rem 1rem 0;
-  vertical-align: top;
-}
-
-.work-table td:last-child { padding-right: 0; }
-
-.td-period {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.6rem;
-  color: var(--muted);
-  white-space: nowrap;
-  width: 108px;
-  padding-top: 1.1rem;
-}
-
-.td-org {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.05rem;
   color: var(--ink);
-  white-space: nowrap;
-  width: 190px;
-  padding-right: 1.5rem;
 }
-
-.td-role {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.56rem;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: var(--rule);
-  white-space: nowrap;
-  width: 160px;
-  padding-top: 1.05rem;
-  padding-right: 1.5rem;
-}
-
-.td-outcome {
-  font-size: 0.88rem;
-  line-height: 1.65;
-  color: var(--muted);
-  font-weight: 300;
-}
-
-.td-outcome strong { color: var(--ink); font-weight: 600; }
 
 /* ═══════════════════════════════════════
-   03 · ACADEMIC FOUNDATION
+   FOUNDATION
 ═══════════════════════════════════════ */
-.foundation-grid {
+.foundation {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 3rem;
 }
 
-.col-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.58rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--muted);
-  margin-bottom: 1.2rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--light);
-}
-
-.edu-item {
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--light);
-}
-
-.edu-item:last-child { border-bottom: none; }
-
-.edu-period {
-  font-family: 'IBM Plex Mono', monospace;
+.f-block-label {
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.6rem;
-  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.f-item {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.f-item:last-child { border-bottom: none; }
+
+.f-item-head {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: 0.98rem;
+  color: var(--ink);
   margin-bottom: 0.2rem;
 }
 
-.edu-degree {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1rem;
-  line-height: 1.2;
-  margin-bottom: 0.15rem;
-  color: var(--ink);
-}
-
-.edu-school {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.58rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--muted);
-  margin-bottom: 0.4rem;
-}
-
-.edu-note {
-  font-size: 0.8rem;
-  font-style: italic;
-  color: var(--muted);
-  line-height: 1.55;
-  font-weight: 300;
-}
-
-.cert-item {
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--light);
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.9rem;
-  align-items: start;
-}
-
-.cert-item:last-child { border-bottom: none; }
-
-.cert-mark {
-  font-family: 'IBM Plex Mono', monospace;
+.f-item-sub {
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.6rem;
-  color: var(--accent);
-  margin-top: 0.2rem;
-}
-
-.cert-name {
-  font-size: 0.92rem;
-  font-weight: 600;
-  margin-bottom: 0.1rem;
-  font-family: 'DM Serif Display', serif;
-}
-
-.cert-detail {
-  font-size: 0.76rem;
   color: var(--muted);
-  line-height: 1.55;
-  font-weight: 300;
-}
-
-.pub-block {
-  margin-top: 1.5rem;
-  padding: 1.1rem 1.3rem;
-  background: var(--surface);
-  border-left: 3px solid var(--accent);
-}
-
-.pub-count {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.8rem;
-  color: var(--accent);
-  line-height: 1;
-  margin-bottom: 0.4rem;
-}
-
-.pub-text {
-  font-size: 0.8rem;
-  color: var(--muted);
-  line-height: 1.6;
-  font-weight: 300;
-  margin-bottom: 0.6rem;
-}
-
-.pub-orcid {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.56rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #A6CE39;
-  opacity: 0.75;
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-
-.pub-orcid:hover { opacity: 1; }
-.pub-orcid svg { flex-shrink: 0; vertical-align: middle; }
-
-/* ═══════════════════════════════════════
-   04 · CAPABILITIES
-═══════════════════════════════════════ */
-.cap-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.8rem 3rem;
-}
-
-.cap-group h4 {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.58rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--muted);
-  margin-bottom: 0.8rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 1px solid var(--light);
-}
-
-.cap-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-}
-
-.cap-tag {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.66rem;
-  padding: 0.22rem 0.6rem;
-  background: var(--paper);
-  color: var(--muted);
-  border: 1px solid var(--light);
   letter-spacing: 0.02em;
-  cursor: default;
-  transition: all 0.15s;
-}
-
-.cap-tag:hover {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
-
-.cap-tag.hi {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
-
-/* ═══════════════════════════════════════
-   CLOSE — languages + contact
-═══════════════════════════════════════ */
-.close-strip {
-  padding-top: 2.5rem;
-  border-top: 2px solid var(--ink);
-  max-width: 420px;
-  margin-top: 0;
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
-}
-
-.close-strip.visible {
-  opacity: 1;
-  transform: none;
-}
-
-.close-col-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.58rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--muted);
-  margin-bottom: 1.1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--light);
 }
 
 .lang-row {
@@ -594,16 +388,14 @@ body {
   justify-content: space-between;
   align-items: baseline;
   padding: 0.55rem 0;
-  border-bottom: 1px solid var(--light);
-  font-size: 0.9rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
 }
 
 .lang-row:last-child { border-bottom: none; }
-
-.lang-name-text { font-weight: 600; }
-
-.lang-level-text {
-  font-family: 'IBM Plex Mono', monospace;
+.lang-name { font-weight: 500; }
+.lang-level {
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.58rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -611,80 +403,42 @@ body {
 }
 
 .reloc-note {
-  font-size: 0.78rem;
-  color: var(--muted);
+  font-size: 0.82rem;
   font-style: italic;
-  margin-top: 1rem;
+  color: var(--muted);
+  margin-top: 1.1rem;
+  line-height: 1.6;
 }
-
 
 /* ═══════════════════════════════════════
-   PAGE FOOTER
+   FOOTER
 ═══════════════════════════════════════ */
 .page-footer {
-  padding-top: 1.2rem;
-  margin-top: 2rem;
-  border-top: 1px solid var(--light);
+  margin-top: 4rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
-  align-items: center;
-}
-
-.page-footer span {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.54rem;
-  color: var(--rule);
-  letter-spacing: 0.06em;
+  align-items: baseline;
+  font-size: 0.62rem;
+  color: var(--muted);
 }
 
 .page-footer a {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.54rem;
   color: var(--accent);
-  letter-spacing: 0.06em;
   text-decoration: none;
-  transition: color 0.15s;
 }
 
 .page-footer a:hover { color: var(--ink); }
 
 /* ═══════════════════════════════════════
-   ANIMATIONS
-═══════════════════════════════════════ */
-@keyframes fadeIn {
-  to { opacity: 1; transform: none; }
-}
-
-/* ═══════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════ */
-@media (max-width: 880px) {
-  .page { padding: 2.5rem 2rem; }
-
-  .mast-body { grid-template-columns: 1fr; }
-  .mast-bio { border-right: none; padding-right: 0; border-bottom: 1px solid var(--rule); padding-bottom: 1.2rem; }
-  .mast-metrics { flex-direction: row; gap: 2rem; flex-wrap: wrap; padding-left: 0; padding-top: 1.2rem; }
-
-  .problems-grid { grid-template-columns: 1fr; gap: 1px; }
-  .prob-card { border-top: none; }
-  .prob-card::after { display: none; }
-  .prob-card:nth-child(1) { border-left: 3px solid var(--accent); }
-  .prob-card:nth-child(2) { border-left: 3px solid var(--ink); }
-  .prob-card:nth-child(3) { border-left: 3px solid var(--muted); }
-
-  .td-role { display: none; }
-  .foundation-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .cap-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 2rem; }
-  .close-strip { max-width: 100%; }
-}
-
-@media (max-width: 560px) {
-  .page { padding: 2rem 1.4rem; }
-  .mast-name { font-size: 2.4rem; }
-  .cap-grid { grid-template-columns: 1fr; }
-  .td-org { width: auto; font-size: 0.9rem; }
-  .td-period { width: 80px; font-size: 0.56rem; }
-  .mast-eyeline-right { gap: 1rem; }
+@media (max-width: 640px) {
+  .page { padding: 2.6rem 1.4rem 3.5rem; }
+  .pair { grid-template-columns: 1.6rem 1fr; }
+  .principle { grid-template-columns: 1fr; gap: 0.4rem; }
+  .foundation { grid-template-columns: 1fr; gap: 2.2rem; }
 }
 
 </style>
@@ -692,529 +446,165 @@ body {
 <body>
 <div class="page">
 
-<!-- ═══════════════════════════════════════════
-     MASTHEAD
-═══════════════════════════════════════════ -->
-<header class="masthead">
-  <div class="mast-eyeline">
-    <span class="mast-label" data-i18n="mast-label">Full-Lifecycle Data Practitioner</span>
-    <div class="mast-eyeline-right">
-      <span class="mast-url">resume.juandedios.info · 2026</span>
+  <div class="topbar">
+    <span class="site-id mono">profile.juandedios.info</span>
+    <div class="toggles">
       <span class="lang-toggle">
-        <span class="lt-opt active" data-lang="en">EN</span>
-        <span class="lt-sep">·</span>
-        <span class="lt-opt" data-lang="es">ES</span>
+        <button class="opt active" data-lang="en" type="button">EN</button>
+        <span class="sep">/</span>
+        <button class="opt" data-lang="es" type="button">ES</button>
       </span>
     </div>
   </div>
 
-  <h1 class="mast-name">Juan de Dios Alvarez</h1>
-
-  <div class="mast-roles" data-i18n="mast-roles">
-    Data Scientist &nbsp;&middot;&nbsp; Data Engineer &nbsp;&middot;&nbsp; Geospatial Analyst &nbsp;&middot;&nbsp; ML Practitioner
-  </div>
-
-  <div class="mast-body">
-    <p class="mast-bio" data-i18n="mast-bio">
-      I build what the organization does not yet have in data — the pipeline that replaces the spreadsheet,
-      the model that goes beyond the notebook, the dashboard that needs no user manual.
-      Twenty years across <strong>particle physics, NLP, geospatial analysis, agricultural finance,
-      healthcare, education, and media</strong>: different domains, the same discipline.
-      Quality first. Accessible outputs. Value demonstrable before the scale-up.
+  <header class="hero">
+    <div class="hero-eyebrow mono" data-i18n="eyebrow">Juan de Dios Alvarez</div>
+    <h1 data-i18n="hero-h1">The <em>unreadable</em> becomes <span class="resolve">usable.</span></h1>
+    <p class="hero-sub" data-i18n="hero-sub">
+      Twenty years of taking whatever was scattered, manual, or simply too dense for anyone
+      to get through — and turning it into something a team can run, trust, and build on.
+      <strong>This page describes what I solve, not where I've worked.</strong>
     </p>
-    <div class="mast-metrics">
-      <div class="metric">
-        <span class="metric-value">20+</span>
-        <span class="metric-label" data-i18n="metric-years">Years with data</span>
-      </div>
-      <div class="metric">
-        <span class="metric-value">7</span>
-        <span class="metric-label" data-i18n="metric-industries">Industries</span>
-      </div>
-      <div class="metric">
-        <span class="metric-value">CERN</span>
-        <span class="metric-label" data-i18n="metric-cred">International research credential</span>
-      </div>
-    </div>
-  </div>
+  </header>
 
-</header>
+  <section class="section" id="s-pairs">
+    <div class="section-label mono" data-i18n="pairs-label">What changes when I'm involved</div>
+    <div class="pairs">
 
-
-<!-- ═══════════════════════════════════════════
-     01 — THREE PROBLEMS I SOLVE
-═══════════════════════════════════════════ -->
-<section class="section problems-section" id="s-problems">
-  <div class="section-head">
-    <span class="section-num">01</span>
-    <h2 class="section-title" data-i18n="title-problems">Three problems I solve.</h2>
-    <span class="section-rule"></span>
-  </div>
-
-  <div class="problems-grid">
-
-    <div class="prob-card">
-      <div class="prob-bg-num">1</div>
-      <div class="prob-domain" data-i18n="prob1-domain">Data Infrastructure &amp; Governance</div>
-      <p class="prob-q" data-i18n="prob1-q">&ldquo;We have data scattered across spreadsheets, vendor feeds, and siloed systems with no single source of truth.&rdquo;</p>
-      <p class="prob-ev" data-i18n="prob1-ev">
-        At <strong>FIRA</strong> (Mexico's national agricultural development trust), I replaced an institution's
-        ad-hoc Excel workflows with an automated, governed pipeline — integrating satellite vegetation indices,
-        climate risk models, and regulatory databases into credit decisions for agricultural producers.
-        Credit analysts adopted it without technical training.
-        Not because it was simple — because it was designed for them.
-        <br><br>
-        At <strong>D3Clarity</strong>, I built the analytics practice from scratch, adding MDM and
-        data lake infrastructure for international clients. <strong>Semarchy xDM certified</strong>
-        — MDM, Data Profiling, Data Lineage, Golden Records.
-      </p>
-      <span class="prob-ref">FIRA · D3Clarity · Semarchy xDM · AWS · PostgreSQL</span>
-    </div>
-
-    <div class="prob-card">
-      <div class="prob-bg-num">2</div>
-      <div class="prob-domain" data-i18n="prob2-domain">Unstructured Text &amp; NLP</div>
-      <p class="prob-q" data-i18n="prob2-q">&ldquo;We have thousands of documents — meeting minutes, contracts, reports — and can't extract anything useful from them.&rdquo;</p>
-      <p class="prob-ev" data-i18n="prob2-ev">
-        At <strong>D3Clarity</strong>, I built the full NLP pipeline: automated scraping of public
-        school board meeting minutes → ML topic classification → Power BI dashboard mapping
-        sales opportunities per district. Public records turned into a production commercial tool.
-        <br><br>
-        At <strong>BairesDev</strong>, a RAG and NLP pipeline made unstructured legal contracts
-        queryable — insight extraction per lawyer, per contract. My MSc thesis addressed
-        automatic text classification in <strong>2009</strong>.
-      </p>
-      <span class="prob-ref" data-i18n="prob2-ref">D3Clarity · BairesDev · MSc ML/NLP · INAOE 2009</span>
-    </div>
-
-    <div class="prob-card">
-      <div class="prob-bg-num">3</div>
-      <div class="prob-domain" data-i18n="prob3-domain">ML to Production</div>
-      <p class="prob-q" data-i18n="prob3-q">&ldquo;Our models work in notebooks. They don't work in the organization.&rdquo;</p>
-      <p class="prob-ev" data-i18n="prob3-ev">
-        Four years at <strong>D3Clarity</strong>: every project followed pilot to production,
-        without exception. At <strong>CITEIM</strong>, Transformer-based models for continuous
-        sign language recognition — fully local inference pipeline, on-device. No cloud dependency by design.
-        <br><br>
-        At the <strong>HAWC Observatory</strong>, distributed computing pipelines processed
-        petabyte-scale cosmic ray datasets across US and Mexican institutions.
-        The physics background is not incidental — it is where production-grade scientific
-        software is built under real constraints.
-      </p>
-      <span class="prob-ref">D3Clarity · CITEIM · HAWC · Azure ML · SageMaker</span>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════
-     02 — WORK HISTORY
-═══════════════════════════════════════════ -->
-<section class="section work-section" id="s-work">
-  <div class="section-head">
-    <span class="section-num">02</span>
-    <h2 class="section-title" data-i18n="title-work">Work history.</h2>
-    <span class="section-rule"></span>
-  </div>
-
-  <table class="work-table">
-    <tbody>
-      <tr>
-        <td class="td-period">2025 – 2026</td>
-        <td class="td-org">FIRA</td>
-        <td class="td-role" data-i18n="work-fira-role">Data Scientist</td>
-        <td class="td-outcome" data-i18n="work-fira">
-          Digital transformation of Mexico's national agricultural credit process.
-          Automated pipeline replacing manual workflows — satellite, climate, and regulatory
-          data integrated into repeatable, governed credit assessments.
-          <strong>Adopted by non-technical analysts without retraining.</strong>
-        </td>
-      </tr>
-      <tr>
-        <td class="td-period">2024 – 2025</td>
-        <td class="td-org">CITEIM</td>
-        <td class="td-role" data-i18n="work-citeim-role">Data Scientist</td>
-        <td class="td-outcome" data-i18n="work-citeim">
-          Transformer-based models for continuous sign language recognition.
-          <strong>Fully local inference pipeline</strong> — on-device processing,
-          no cloud dependency; deliberate architectural choice to reduce latency
-          and eliminate operational cost. Current-generation AI applied to a
-          direct human communication problem with social impact.
-        </td>
-      </tr>
-      <tr>
-        <td class="td-period">2023 – 2024</td>
-        <td class="td-org">Punto Singular</td>
-        <td class="td-role" data-i18n="work-psingular-role">Data Scientist &amp; Team Lead</td>
-        <td class="td-outcome" data-i18n="work-psingular">
-          KPI and Quality dashboards (R, Python, Tableau, Looker) for business
-          stakeholders. Financial market streaming prototype on AWS (WebSocket pipelines).
-          Multi-sector client engagements: EdTech, environmental monitoring, industrial analytics.
-          <strong>Founded an internal Data Science group</strong> — students solving
-          real problems for nonprofits and clients.
-        </td>
-      </tr>
-      <tr>
-        <td class="td-period">2023</td>
-        <td class="td-org">BairesDev</td>
-        <td class="td-role" data-i18n="work-bairesdev-role">Data Scientist</td>
-        <td class="td-outcome" data-i18n="work-bairesdev">
-          Graph database modeling (Neo4j) for relationship analysis.
-          Transformer-based text summarization.
-          <strong>RAG + NLP pipeline for legal contracts</strong> — clause extraction,
-          obligation mapping, per-lawyer portfolio querying. AirTable data curation.
-        </td>
-      </tr>
-      <tr>
-        <td class="td-period">2019 – 2023</td>
-        <td class="td-org">D3Clarity</td>
-        <td class="td-role" data-i18n="work-d3clarity-role">Data Scientist</td>
-        <td class="td-outcome" data-i18n="work-d3clarity">
-          <strong>Built the analytics practice from scratch</strong> —
-          expanding the company's offering beyond MDM.
-          Four years: NLP pipelines, data lakes, ETL, forecasting models, MDM,
-          executive dashboards for international clients. Agile/Scrum with Jira.
-          Every project: pilot to production.
-        </td>
-      </tr>
-      <tr>
-        <td class="td-period">2009 – 2013</td>
-        <td class="td-org">HAWC Observatory</td>
-        <td class="td-role" data-i18n="work-hawc-role">Doctoral Researcher</td>
-        <td class="td-outcome" data-i18n="work-hawc">
-          Doctoral research at the HAWC Observatory — petabyte-scale cosmic ray data,
-          distributed computing, Bayesian spectral analysis. Peer-reviewed publications
-          as HAWC Collaboration member. Multinational experiment spanning US and Mexican
-          research institutions.
-        </td>
-      </tr>
-      <tr>
-        <td class="td-period">2004 – 2019</td>
-        <td class="td-org">Tec MTY · UMSNH</td>
-        <td class="td-role" data-i18n="work-acad-role">Lecturer &amp; Consultant</td>
-        <td class="td-outcome" data-i18n="work-acad">
-          Teaching at Tec de Monterrey. IT infrastructure and systems administration at UMSNH.
-          Consulting across real estate, media, healthcare, education, and public sector.
-        </td>
-      </tr>
-      <tr>
-        <td class="td-period">2002</td>
-        <td class="td-org">CERN / U. Lausanne</td>
-        <td class="td-role" data-i18n="work-cern-role">Research Engineer</td>
-        <td class="td-outcome" data-i18n="work-cern">
-          Data acquisition system for a Positron Emission Tomography scanner
-          (ClearPET project). Signal conversion and data handling at CERN,
-          under CONACYT-CERN cooperation.
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-
-<!-- ═══════════════════════════════════════════
-     03 — ACADEMIC FOUNDATION
-═══════════════════════════════════════════ -->
-<section class="section foundation-section" id="s-foundation">
-  <div class="section-head">
-    <span class="section-num">03</span>
-    <h2 class="section-title" data-i18n="title-foundation">Academic foundation.</h2>
-    <span class="section-rule"></span>
-  </div>
-
-  <div class="foundation-grid">
-
-    <div>
-      <div class="col-label" data-i18n="col-education">Education</div>
-
-      <div class="edu-item">
-        <div class="edu-period">2009 – 2013</div>
-        <div class="edu-degree" data-i18n="edu-phd-degree">Doctoral Studies — Physics (research completed)</div>
-        <div class="edu-school" data-i18n="edu-phd-school">UMSNH · HAWC Collaboration (Mexico / United States)</div>
-        <div class="edu-note" data-i18n="edu-phd-note">Cosmic ray composition analysis at petabyte scale. GPA 10.0. Peer-reviewed publications as HAWC Collaboration member. Multinational experiment spanning US and Mexican research institutions.</div>
-      </div>
-
-      <div class="edu-item">
-        <div class="edu-period">2006 – 2009</div>
-        <div class="edu-degree" data-i18n="edu-msc-degree">MSc — Computer Science (ML / NLP)</div>
-        <div class="edu-school" data-i18n="edu-msc-school">INAOE — National Institute of Astrophysics, Optics and Electronics</div>
-        <div class="edu-note" data-i18n="edu-msc-note">Thesis: &ldquo;Automatic text classification using prototype-based class reduction.&rdquo; The foundation for every NLP engagement that followed — written in 2009, before the label existed.</div>
-      </div>
-
-      <div class="edu-item">
-        <div class="edu-period">August 2009</div>
-        <div class="edu-degree" data-i18n="edu-cern-degree">CERN School of Computing</div>
-        <div class="edu-school" data-i18n="edu-cern-school">Georg-August-Universität Göttingen · CERN CSC2009</div>
-        <div class="edu-note" data-i18n="edu-cern-note">Scientific computing in high-energy physics. Distributed systems, advanced computational methods.</div>
-      </div>
-
-      <div class="edu-item">
-        <div class="edu-period">1998 – 2003</div>
-        <div class="edu-degree" data-i18n="edu-bsc-degree">BSc — Physics &amp; Mathematics</div>
-        <div class="edu-school" data-i18n="edu-bsc-school">Universidad Michoacana de San Nicolás de Hidalgo</div>
-        <div class="edu-note" data-i18n="edu-bsc-note">Thesis: &ldquo;Use of a pixel silicon detector in radiography.&rdquo; Data acquisition and signal processing at the instrumentation level — where most data quality problems originate.</div>
-      </div>
-    </div>
-
-    <div>
-      <div class="col-label" data-i18n="col-certs">Certifications</div>
-
-      <div class="cert-item">
-        <span class="cert-mark">&#10003;</span>
-        <div>
-          <div class="cert-name">AWS Cloud Practitioner</div>
-          <div class="cert-detail" data-i18n="cert-aws-detail">AWS Well-Architected Framework · Cloud infrastructure fundamentals · 2023</div>
+      <div class="pair">
+        <div class="pair-index mono">01</div>
+        <div class="pair-body">
+          <p class="pair-raw" data-i18n="p1-raw">a process that lives in one person's head, and in spreadsheets only they understand</p>
+          <div class="pair-arrow"><span class="track"></span><span class="label mono" data-i18n="becomes">becomes</span></div>
+          <p class="pair-resolved" data-i18n="p1-resolved">a <strong>system the whole team can run, trust, and hand off</strong> — every figure traceable back to where it came from.</p>
         </div>
       </div>
 
-      <div class="cert-item">
-        <span class="cert-mark">&#10003;</span>
-        <div>
-          <div class="cert-name" data-i18n="cert-xdm-name">Semarchy xDM Certified</div>
-          <div class="cert-detail" data-i18n="cert-xdm-detail">Master Data Management · Data Profiling · Data Lineage · Golden Records · Governance · 2022</div>
+      <div class="pair">
+        <div class="pair-index mono">02</div>
+        <div class="pair-body">
+          <p class="pair-raw" data-i18n="p2-raw">a pile of documents, images, or signals no one has time to read one by one</p>
+          <div class="pair-arrow"><span class="track"></span><span class="label mono" data-i18n="becomes">becomes</span></div>
+          <p class="pair-resolved" data-i18n="p2-resolved">a <strong>model that reads it for them</strong>, tested until it holds up outside a demo, not just inside one.</p>
         </div>
       </div>
 
-      <div class="pub-block">
-        <p class="pub-text" data-i18n="pub-text">
-          Contributing member of The HAWC Collaboration — an international
-          multi-institution observatory operating at 4,100m altitude, Sierra Negra, Mexico.
-          PhD research published in Phys.&nbsp;Rev.&nbsp;D (2022).
-          The Collaboration's research has appeared in <em>Science</em> (2017),
-          among other peer-reviewed journals and international conference proceedings.
-        </p>
-        <a class="pub-orcid" href="https://orcid.org/0000-0001-6421-935X" target="_blank" rel="noopener">
-          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 256 256" aria-hidden="true">
-            <path d="M256 128c0 70.7-57.3 128-128 128S0 198.7 0 128 57.3 0 128 0s128 57.3 128 128z" fill="#A6CE39"/>
-            <path d="M86.3 186.2H70.9V79.1h15.4v107.1zM108.9 79.1h41.6c39.6 0 57 28.3 57 53.6 0 27.5-21.5 53.6-56.8 53.6h-41.8V79.1zm15.4 93.3h24.5c34.9 0 42.9-26.5 42.9-39.7C191.7 111.2 178 93 148 93h-23.7v79.4z" fill="#fff"/>
-            <path d="M88.7 56.8c0 5.5-4.5 10.1-10.1 10.1s-10.1-4.6-10.1-10.1c0-5.6 4.5-10.1 10.1-10.1s10.1 4.5 10.1 10.1z" fill="#fff"/>
-          </svg>
-          <span data-i18n="pub-orcid-text">Publication record on ORCID</span>
-        </a>
+      <div class="pair">
+        <div class="pair-index mono">03</div>
+        <div class="pair-body">
+          <p class="pair-raw" data-i18n="p3-raw">a subject nobody in the room understands yet</p>
+          <div class="pair-arrow"><span class="track"></span><span class="label mono" data-i18n="becomes">becomes</span></div>
+          <p class="pair-resolved" data-i18n="p3-resolved"><strong>people who can use it themselves</strong> — the goal was never to be the only one who understands it.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="s-how">
+    <div class="section-label mono" data-i18n="how-label">How I get there</div>
+    <div class="principles">
+      <div class="principle">
+        <div class="principle-name" data-i18n="how1-name">Verify first</div>
+        <div class="principle-text" data-i18n="how1-text">I check what the material actually says before building anything on top of it. Assumptions taken here cost more later, in every domain.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-name" data-i18n="how2-name">Design for handoff</div>
+        <div class="principle-text" data-i18n="how2-text">A system only has value once the people it's for can use it without me in the room. I build toward that moment, not away from it.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-name" data-i18n="how3-name">Prove it small</div>
+        <div class="principle-text" data-i18n="how3-text">A working, narrow version that demonstrates the approach comes before the full build. Scale follows demonstrated value.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-name" data-i18n="how4-name">Domain-agnostic</div>
+        <div class="principle-text" data-i18n="how4-text">Physics, agriculture, legal text, retail, classrooms, public institutions — the subject changes every time. What I bring to it does not.</div>
       </div>
     </div>
+  </section>
 
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════
-     04 — TECHNICAL CAPABILITIES
-═══════════════════════════════════════════ -->
-<section class="section capabilities-section" id="s-capabilities">
-  <div class="section-head">
-    <span class="section-num">04</span>
-    <h2 class="section-title" data-i18n="title-capabilities">Technical capabilities.</h2>
-    <span class="section-rule"></span>
-  </div>
-
-  <div class="cap-grid">
-
-    <div class="cap-group">
-      <h4 data-i18n="cap-core-lang">Core Languages</h4>
-      <div class="cap-tags">
-        <span class="cap-tag hi">Python</span>
-        <span class="cap-tag hi">SQL</span>
-        <span class="cap-tag">R</span>
-        <span class="cap-tag">Julia</span>
-        <span class="cap-tag">C / C++</span>
-        <span class="cap-tag">Java</span>
-        <span class="cap-tag">Shell</span>
+  <section class="section" id="s-foundation">
+    <div class="section-label mono" data-i18n="foundation-label">Foundation</div>
+    <div class="foundation">
+      <div>
+        <div class="f-block-label" data-i18n="col-education">Education</div>
+        <div class="f-item">
+          <div class="f-item-head" data-i18n="edu-phd-head">Doctoral candidate, Physics</div>
+          <div class="f-item-sub" data-i18n="edu-phd-sub">Large-scale scientific data analysis · multinational research collaboration</div>
+        </div>
+        <div class="f-item">
+          <div class="f-item-head" data-i18n="edu-msc-head">Master's, Computer Science</div>
+          <div class="f-item-sub" data-i18n="edu-msc-sub">Machine learning &amp; language processing</div>
+        </div>
+        <div class="f-item">
+          <div class="f-item-head" data-i18n="edu-bsc-head">Bachelor's, Physics &amp; Mathematics</div>
+          <div class="f-item-sub" data-i18n="edu-bsc-sub">Data acquisition &amp; signal processing</div>
+        </div>
+      </div>
+      <div>
+        <div class="f-block-label" data-i18n="col-languages">Languages</div>
+        <div class="lang-row"><span class="lang-name">Español</span><span class="lang-level" data-i18n="lang-es-level">Native</span></div>
+        <div class="lang-row"><span class="lang-name">English</span><span class="lang-level" data-i18n="lang-en-level">Professional</span></div>
+        <div class="lang-row"><span class="lang-name">Italiano</span><span class="lang-level" data-i18n="lang-it-level">Basic&ndash;Intermediate</span></div>
+        <div class="lang-row"><span class="lang-name">Français</span><span class="lang-level" data-i18n="lang-fr-level">Basic</span></div>
+        <p class="reloc-note" data-i18n="reloc-note">Available to relocate. The logistics of moving are not the obstacle — finding the right fit is.</p>
       </div>
     </div>
+  </section>
 
-    <div class="cap-group">
-      <h4 data-i18n="cap-ml-ai">ML &amp; AI</h4>
-      <div class="cap-tags">
-        <span class="cap-tag hi">NLP / LLMs</span>
-        <span class="cap-tag hi">Transformers</span>
-        <span class="cap-tag">scikit-learn</span>
-        <span class="cap-tag" data-i18n="tag-geospatial-ml">Geospatial ML</span>
-        <span class="cap-tag" data-i18n="tag-forecasting">Forecasting</span>
-        <span class="cap-tag" data-i18n="tag-classification">Classification</span>
-        <span class="cap-tag">RAG</span>
-        <span class="cap-tag">Gen AI</span>
-      </div>
-    </div>
+  <footer class="page-footer">
+    <span data-i18n="footer-main">Juan de Dios Alvarez · 2026</span>
+    <a href="https://www.linkedin.com/in/juandedios-info/" target="_blank" rel="noopener">linkedin.com/in/juandedios-info</a>
+  </footer>
 
-    <div class="cap-group">
-      <h4 data-i18n="cap-data-eng">Data Engineering</h4>
-      <div class="cap-tags">
-        <span class="cap-tag hi">ETL / Pipelines</span>
-        <span class="cap-tag hi">MDM / Governance</span>
-        <span class="cap-tag">PostgreSQL</span>
-        <span class="cap-tag">Neo4j</span>
-        <span class="cap-tag">Oracle / MySQL</span>
-        <span class="cap-tag">Linux / SysAdmin</span>
-        <span class="cap-tag">Git</span>
-      </div>
-    </div>
-
-    <div class="cap-group">
-      <h4 data-i18n="cap-cloud">Cloud &amp; MLOps</h4>
-      <div class="cap-tags">
-        <span class="cap-tag hi">AWS EC2 / SageMaker</span>
-        <span class="cap-tag hi">Azure ML</span>
-        <span class="cap-tag">GCP</span>
-        <span class="cap-tag">Agile / Scrum</span>
-        <span class="cap-tag">Jira</span>
-      </div>
-    </div>
-
-    <div class="cap-group">
-      <h4 data-i18n="cap-viz">Visualization</h4>
-      <div class="cap-tags">
-        <span class="cap-tag hi">Power BI</span>
-        <span class="cap-tag hi">Tableau</span>
-        <span class="cap-tag">Apache Superset</span>
-        <span class="cap-tag">Looker</span>
-        <span class="cap-tag">Airtable</span>
-      </div>
-    </div>
-
-    <div class="cap-group">
-      <h4 data-i18n="cap-methods">Methods</h4>
-      <div class="cap-tags">
-        <span class="cap-tag hi" data-i18n="tag-data-gov">Data Governance</span>
-        <span class="cap-tag" data-i18n="tag-data-lit">Data Literacy</span>
-        <span class="cap-tag" data-i18n="tag-bayesian">Statistical Modeling</span>
-        <span class="cap-tag" data-i18n="tag-hpc">Large-scale Data Processing</span>
-        <span class="cap-tag" data-i18n="tag-leadership">Team Leadership</span>
-        <span class="cap-tag" data-i18n="tag-mentorship">Mentorship</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════
-     CLOSE — languages + contact
-═══════════════════════════════════════════ -->
-<div class="close-strip" id="s-close">
-  <div>
-    <div class="close-col-label" data-i18n="close-languages">Languages</div>
-    <div class="lang-row">
-      <span class="lang-name-text">Español</span>
-      <span class="lang-level-text" data-i18n="lang-spanish-level">Native</span>
-    </div>
-    <div class="lang-row">
-      <span class="lang-name-text">English</span>
-      <span class="lang-level-text" data-i18n="lang-english-level">Professional &middot; 4+ yrs international</span>
-    </div>
-    <div class="lang-row">
-      <span class="lang-name-text">Italiano</span>
-      <span class="lang-level-text" data-i18n="lang-italian-level">Basic–Intermediate &middot; In progress</span>
-    </div>
-    <div class="lang-row">
-      <span class="lang-name-text">Français</span>
-      <span class="lang-level-text" data-i18n="lang-french-level">Basic</span>
-    </div>
-    <p class="reloc-note" data-i18n="reloc-note">Available to relocate. Open to international positions. Logistical transition is not a constraint.</p>
-  </div>
 </div>
-
-
-<footer class="page-footer">
-  <span data-i18n="footer-main">Juan de Dios Alvarez · Data Practitioner · 2026</span>
-  <a href="https://www.linkedin.com/in/juandedios-info/" target="_blank" rel="noopener">linkedin.com/in/juandedios-info</a>
-</footer>
-
-</div><!-- /page -->
 
 <script>
 (function () {
 
-  /* ─── SPANISH TRANSLATIONS ─── */
   var es = {
-    'mast-label':        'Profesional de Datos · Ciclo Completo',
-    'mast-roles':        'Científico de Datos &nbsp;&middot;&nbsp; Ingeniero de Datos &nbsp;&middot;&nbsp; Analista Geoespacial &nbsp;&middot;&nbsp; ML Practitioner',
-    'mast-bio':          'Construyo lo que la organización aún no tiene en datos — el pipeline que reemplaza la hoja de cálculo, el modelo que va más allá del notebook, el dashboard que no necesita manual de usuario. Veinte años en <strong>física de partículas, PLN, análisis geoespacial, finanzas agrícolas, salud, educación y medios</strong>: dominios distintos, la misma disciplina. Calidad primero. Salidas accesibles. Valor demostrable antes del escalamiento.',
+    'eyebrow':        'Juan de Dios Alvarez',
+    'hero-h1':         'Lo <em>ilegible</em> se vuelve <span class="resolve">utilizable.</span>',
+    'hero-sub':        'Veinte años tomando lo que estaba disperso, era manual, o simplemente demasiado denso para que alguien lo revisara — y convirtiéndolo en algo que un equipo puede ejecutar, en lo que puede confiar, y sobre lo cual puede construir. <strong>Esta página describe lo que resuelvo, no dónde he trabajado.</strong>',
 
-    'metric-years':      'Años con datos',
-    'metric-industries': 'Industrias',
-    'metric-cred':       'Credencial internacional en investigación',
+    'pairs-label':     'Qué cambia cuando participo',
+    'becomes':         'se vuelve',
+    'p1-raw':          'un proceso que vive en la cabeza de una sola persona, en hojas de cálculo que solo ella entiende',
+    'p1-resolved':     'un <strong>sistema que todo el equipo puede ejecutar, en el que puede confiar, y que puede heredar</strong> — cada cifra rastreable hasta su origen.',
+    'p2-raw':          'un montón de documentos, imágenes o señales que nadie tiene tiempo de leer uno por uno',
+    'p2-resolved':     'un <strong>modelo que lo lee por ellos</strong>, probado hasta que funciona fuera de una demo, no solo dentro de una.',
+    'p3-raw':          'un tema que nadie en la sala entiende todavía',
+    'p3-resolved':     '<strong>personas que ya pueden usarlo por sí mismas</strong> — la meta nunca fue ser el único que lo entiende.',
 
-    'title-problems':    'Tres problemas que resuelvo.',
-    'prob1-domain':      'Infraestructura de Datos y Gobernanza',
-    'prob1-q':           '&ldquo;Tenemos datos dispersos en hojas de cálculo, feeds de proveedores y sistemas aislados, sin una fuente única de verdad.&rdquo;',
-    'prob1-ev':          'En <strong>FIRA</strong> (fideicomiso nacional de desarrollo agrícola de México), reemplacé los flujos ad hoc en Excel de una institución con un pipeline automatizado y gobernado — integrando índices de vegetación satelital, modelos de riesgo climático y bases regulatorias en las decisiones de crédito para productores agrícolas. Los analistas lo adoptaron sin capacitación técnica. No porque fuera simple — sino porque fue diseñado para ellos.<br><br>En <strong>D3Clarity</strong>, construí la práctica analítica desde cero, incorporando infraestructura MDM y data lake para clientes internacionales. <strong>Certificado Semarchy xDM</strong> — MDM, Perfilado de Datos, Linaje, Registros Dorados.',
-    'prob2-domain':      'Texto No Estructurado y PLN',
-    'prob2-q':           '&ldquo;Tenemos miles de documentos — actas, contratos, reportes — y no podemos extraer nada útil de ellos.&rdquo;',
-    'prob2-ev':          'En <strong>D3Clarity</strong>, construí el pipeline completo de PLN: scraping automatizado de actas públicas de juntas escolares → clasificación de temas con ML → dashboard en Power BI mapeando oportunidades de venta por distrito. Registros públicos convertidos en una herramienta comercial de producción.<br><br>En <strong>BairesDev</strong>, un pipeline RAG y PLN hizo consultables contratos legales no estructurados — extracción de información por abogado, por contrato. Mi tesis de maestría abordó la clasificación automática de texto en <strong>2009</strong>.',
-    'prob2-ref':         'D3Clarity · BairesDev · Maestría ML/PLN · INAOE 2009',
-    'prob3-domain':      'ML a Producción',
-    'prob3-q':           '&ldquo;Nuestros modelos funcionan en notebooks. No funcionan en la organización.&rdquo;',
-    'prob3-ev':          'Cuatro años en <strong>D3Clarity</strong>: cada proyecto siguió el camino de piloto a producción, sin excepción. En <strong>CITEIM</strong>, modelos basados en Transformer para reconocimiento continuo de lengua de señas — pipeline de inferencia totalmente local, en dispositivo. Sin dependencia de nube por diseño.<br><br>En el <strong>Observatorio HAWC</strong>, los pipelines de computación distribuida procesaron petabytes de datos de rayos cósmicos entre instituciones de México y EE. UU. El contexto de física no es incidental — es donde el software científico de grado de producción se construye bajo restricciones reales.',
+    'how-label':       'Cómo llego ahí',
+    'how1-name':       'Verificar primero',
+    'how1-text':       'Reviso lo que el material realmente dice antes de construir algo encima. Los supuestos aquí cuestan más después, en cualquier dominio.',
+    'how2-name':       'Diseñar para el traspaso',
+    'how2-text':       'Un sistema solo tiene valor una vez que las personas para quienes es puedan usarlo sin que yo esté presente. Construyo hacia ese momento, no en su contra.',
+    'how3-name':       'Probarlo en pequeño',
+    'how3-text':       'Una versión pequeña y funcional que demuestre el enfoque llega antes que la construcción completa. El escalamiento sigue al valor demostrado.',
+    'how4-name':       'Independiente del dominio',
+    'how4-text':       'Física, agricultura, texto legal, retail, aulas, instituciones públicas — el tema cambia cada vez. Lo que aporto no.',
 
-    'title-work':        'Historial laboral.',
-    'work-fira-role':    'Científico de Datos',
-    'work-fira':         'Transformación digital del proceso nacional de crédito agrícola de México. Pipeline automatizado que reemplaza flujos manuales — datos satelitales, climáticos y regulatorios integrados en evaluaciones crediticias reproducibles y gobernadas. <strong>Adoptado por analistas no técnicos sin reentrenamiento.</strong>',
-    'work-citeim-role':  'Científico de Datos',
-    'work-citeim':       'Modelos basados en Transformer para reconocimiento continuo de lengua de señas. <strong>Pipeline de inferencia totalmente local</strong> — en dispositivo, sin dependencia de nube; decisión arquitectónica deliberada para reducir latencia y eliminar costo operacional. IA de última generación aplicada a un problema de comunicación humana con impacto social.',
-    'work-psingular-role': 'Científico de Datos y Líder de Equipo',
-    'work-psingular':    'Dashboards de KPIs y Tarjetas de Calidad (R, Python, Tableau, Looker) para tomadores de decisiones. Prototipo de streaming de mercado financiero en AWS (pipelines WebSocket). Proyectos para múltiples sectores: EdTech, monitoreo ambiental, analítica industrial. <strong>Fundó el grupo interno de Ciencia de Datos</strong> — estudiantes resolviendo problemas reales para ONGs y clientes.',
-    'work-bairesdev-role': 'Científico de Datos',
-    'work-bairesdev':    'Modelado con base de datos de grafos (Neo4j) para análisis de relaciones. Sumarización de texto con Transformers. <strong>Pipeline RAG + PLN para contratos legales</strong> — extracción de cláusulas, mapeo de obligaciones, consulta por portafolio de cada abogado. Curación de datos con AirTable.',
-    'work-d3clarity-role': 'Científico de Datos',
-    'work-d3clarity':    '<strong>Construyó la práctica analítica desde cero</strong> — expandiendo la oferta de la empresa más allá del MDM. Cuatro años: pipelines PLN, data lakes, ETL, modelos de pronóstico, MDM, dashboards ejecutivos para clientes internacionales. Agile/Scrum con Jira. Cada proyecto: de piloto a producción.',
-    'work-hawc-role':    'Investigador Doctoral',
-    'work-hawc':         'Investigación doctoral en el Observatorio HAWC — datos de rayos cósmicos a escala de petabytes, computación distribuida, análisis espectral bayesiano. Publicaciones revisadas por pares como miembro de la Colaboración HAWC. Experimento multinacional en instituciones de México y EE. UU.',
-    'work-acad-role':    'Docente y Consultor',
-    'work-acad':         'Docencia en Tec de Monterrey. Infraestructura TI y administración de sistemas en la UMSNH. Consultoría en bienes raíces, medios, salud, educación y sector público.',
-    'work-cern-role':    'Ingeniero de Investigación',
-    'work-cern':         'Sistema de adquisición de datos para un escáner de Tomografía por Emisión de Positrones (proyecto ClearPET). Conversión de señales y manejo de datos en CERN, bajo cooperación CONACYT-CERN.',
+    'foundation-label':'Formación',
+    'col-education':   'Educación',
+    'col-languages':   'Idiomas',
+    'edu-phd-head':    'Candidato a doctorado, Física',
+    'edu-phd-sub':     'Análisis de datos científicos a gran escala · colaboración de investigación multinacional',
+    'edu-msc-head':    'Maestría, Ciencias Computacionales',
+    'edu-msc-sub':     'Machine learning y procesamiento de lenguaje',
+    'edu-bsc-head':    'Licenciatura, Física y Matemáticas',
+    'edu-bsc-sub':     'Adquisición de datos y procesamiento de señales',
 
-    'title-foundation':  'Formación académica.',
-    'col-education':     'Educación',
-    'col-certs':         'Certificaciones',
-    'edu-phd-degree':    'Estudios Doctorales — Física (investigación completada)',
-    'edu-phd-school':    'UMSNH · Colaboración HAWC (México / Estados Unidos)',
-    'edu-phd-note':      'Análisis de composición de rayos cósmicos a escala de petabytes. Promedio 10.0. Publicaciones revisadas por pares como miembro de la Colaboración HAWC. Experimento multinacional en instituciones de México y EE. UU.',
-    'edu-msc-degree':    'Maestría — Ciencias Computacionales (ML / PLN)',
-    'edu-msc-school':    'INAOE — Instituto Nacional de Astrofísica, Óptica y Electrónica',
-    'edu-msc-note':      'Tesis: &ldquo;Clasificación automática de texto mediante reducción de clase basada en prototipos.&rdquo; La base de cada proyecto PLN posterior — escrito en 2009, antes de que existiera la etiqueta.',
-    'edu-cern-degree':   'Escuela de Computación del CERN',
-    'edu-cern-school':   'Georg-August-Universität Göttingen · CERN CSC2009',
-    'edu-cern-note':     'Computación científica en física de altas energías. Sistemas distribuidos, métodos computacionales avanzados.',
-    'edu-bsc-degree':    'Licenciatura — Físico Matemáticas',
-    'edu-bsc-school':    'Universidad Michoacana de San Nicolás de Hidalgo',
-    'edu-bsc-note':      'Tesis: &ldquo;Uso de un detector de silicio de píxeles en radiografía.&rdquo; Adquisición de datos y procesamiento de señales a nivel de instrumentación — donde se originan la mayoría de los problemas de calidad de datos.',
-    'cert-aws-detail':   'Marco Well-Architected de AWS · Fundamentos de infraestructura en nube · 2023',
-    'cert-xdm-name':     'Semarchy xDM Certificado',
-    'cert-xdm-detail':   'Gestión de Datos Maestros · Perfilado de Datos · Linaje de Datos · Registros Dorados · Gobernanza · 2022',
-    'pub-text':          'Miembro colaborador de The HAWC Collaboration — observatorio internacional multi-institucional a 4,100m de altitud, Sierra Negra, México. Investigación doctoral publicada en Phys.&nbsp;Rev.&nbsp;D (2022). La investigación de la Colaboración ha aparecido en <em>Science</em> (2017), entre otras revistas arbitradas y actas de congresos internacionales.',
-    'pub-orcid-text':    'Registro de publicaciones en ORCID',
+    'lang-es-level':   'Nativo',
+    'lang-en-level':   'Profesional',
+    'lang-it-level':   'Básico–Intermedio',
+    'lang-fr-level':   'Básico',
+    'reloc-note':      'Disponible para reubicación. La logística de mudarse no es el obstáculo — encontrar el lugar correcto sí importa.',
 
-    'title-capabilities': 'Capacidades técnicas.',
-    'cap-core-lang':     'Lenguajes Principales',
-    'cap-ml-ai':         'ML e IA',
-    'cap-data-eng':      'Ingeniería de Datos',
-    'cap-cloud':         'Nube y MLOps',
-    'cap-viz':           'Visualización',
-    'cap-methods':       'Métodos',
-    'tag-geospatial-ml': 'ML Geoespacial',
-    'tag-forecasting':   'Pronóstico',
-    'tag-classification':'Clasificación',
-    'tag-data-gov':      'Gobernanza de Datos',
-    'tag-data-lit':      'Alfabetización en Datos',
-    'tag-bayesian':      'Modelado Estadístico',
-    'tag-hpc':           'Procesamiento a Gran Escala',
-    'tag-leadership':    'Liderazgo de Equipo',
-    'tag-mentorship':    'Mentoría',
-
-    'close-languages':   'Idiomas',
-    'lang-spanish-level':'Nativo',
-    'lang-english-level':'Profesional · 4+ años internacional',
-    'lang-italian-level':'Básico–Intermedio · En progreso',
-    'lang-french-level': 'Básico',
-    'reloc-note':        'Disponible para reubicación. Abierto a posiciones internacionales. La transición logística no es un obstáculo.',
-
-    'footer-main':       'Juan de Dios Alvarez · Profesional de Datos · 2026'
+    'footer-main':     'Juan de Dios Alvarez · 2026'
   };
 
-  /* ─── ENGLISH CACHE ─── populated on first toggle */
   var enCache = {};
 
   function applyLang(lang) {
@@ -1223,30 +613,22 @@ body {
       if (!enCache[key]) enCache[key] = el.innerHTML;
       el.innerHTML = (lang === 'es' && es[key]) ? es[key] : enCache[key];
     });
-    document.querySelectorAll('.lt-opt').forEach(function (opt) {
+    document.querySelectorAll('.lang-toggle .opt').forEach(function (opt) {
       opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
     });
     document.documentElement.setAttribute('lang', lang);
-    document.title = lang === 'es'
-      ? 'Juan de Dios Alvarez · Profesional de Datos'
-      : 'Juan de Dios Alvarez · Data Practitioner';
     try { localStorage.setItem('cv-lang', lang); } catch (e) {}
   }
 
-  /* ─── TOGGLE CLICK HANDLERS ─── */
-  document.querySelectorAll('.lt-opt').forEach(function (opt) {
-    opt.addEventListener('click', function () {
-      applyLang(this.getAttribute('data-lang'));
-    });
+  document.querySelectorAll('.lang-toggle .opt').forEach(function (opt) {
+    opt.addEventListener('click', function () { applyLang(this.getAttribute('data-lang')); });
   });
 
-  /* ─── RESTORE SAVED LANGUAGE ─── */
   try {
     var saved = localStorage.getItem('cv-lang');
     if (saved === 'es') applyLang('es');
   } catch (e) {}
 
-  /* ─── INTERSECTION OBSERVER (scroll-in animations) ─── */
   var io = new IntersectionObserver(function (entries, obs) {
     entries.forEach(function (e) {
       if (!e.isIntersecting) return;
@@ -1255,8 +637,7 @@ body {
     });
   }, { threshold: 0.08 });
 
-  document.querySelectorAll('.section, .close-strip')
-    .forEach(function (el) { io.observe(el); });
+  document.querySelectorAll('.section').forEach(function (el) { io.observe(el); });
 
 })();
 </script>
