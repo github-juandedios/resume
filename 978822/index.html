@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Juan de Dios Alvarez</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:     #1a1208;
+  --paper:   #f7f3ed;
+  --accent:  #9a3412;
+  --muted:   #7a6f65;
+  --light:   #ddd5c9;
+  --rule:    #c4b8ac;
+  --surface: #ede8e1;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.page { max-width: 760px; margin: 0 auto; padding: 3rem 2rem 4rem; }
+.masthead { border-top: 3px solid var(--ink); padding-top: 1.4rem; margin-bottom: 2rem; }
+.mast-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; text-transform: uppercase;
+  letter-spacing: 0.18em; color: var(--muted); margin-bottom: 0.8rem;
+}
+h1 {
+  font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4.5vw, 2.8rem);
+  line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 0.4rem;
+}
+h2 {
+  font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--ink);
+  border-top: 1px solid var(--rule); padding-top: 1.6rem; margin-top: 2rem; margin-bottom: 0.9rem;
+}
+h2:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+h3 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--accent); margin-top: 1.1rem; margin-bottom: 0.3rem;
+}
+p { font-weight: 300; margin-bottom: 0.7rem; font-size: 0.98rem; }
+ul { margin: 0 0 0.9rem 1.1rem; padding: 0; }
+li { font-weight: 300; font-size: 0.94rem; margin-bottom: 0.35rem; }
+strong { font-weight: 600; color: var(--accent); }
+hr { border: none; border-top: 1px solid var(--rule); margin: 1.6rem 0; }
+.pdf-link {
+  display: inline-flex; align-items: baseline; gap: 0.5rem;
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--paper); background: var(--accent);
+  padding: 0.7rem 1.1rem; text-decoration: none; margin-bottom: 2rem;
+}
+.pdf-link:hover { background: var(--ink); }
+.footer {
+  margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule);
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; color: var(--rule);
+  letter-spacing: 0.06em;
+}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="masthead">
+<div class="mast-label">Tailored Resume</div>
+<a class="pdf-link" href="resume.pdf">Download PDF</a>
+</div>
+<h1>Juan de Dios Alvarez</h1>
+<p><strong>Senior Data Scientist - Machine Learning, Model Evaluation and Applied AI</strong></p>
+<p>oficina@juandedios.info | +52 443 491 4258 | Morelia, Mexico | linkedin.com/in/juandedios-info</p>
+<p>profile.juandedios.info/978822</p>
+<hr>
+<h2>Summary</h2>
+<p>Data scientist with seven years of industry work (2019 to present) and a research background in physics and computer science. Builds models and pipelines in Python and SQL that a team can rerun, audit and maintain, and measures each method against a baseline, control set or ground truth before anyone relies on it, documenting its assumptions and limits. Works AI-first with Claude daily and decides between an LLM and a classical method by measurement. Learns new tools on the job and puts them to use within the engagement, as two recommendation letters describe independently.</p>
+<hr>
+<h2>How I Work</h2>
+<ul>
+<li><strong>Ramp-up on unfamiliar technology:</strong> studied LabVIEW on arrival at CERN and the University of Lausanne and, in the same one-month stay, developed the data-acquisition communication software for a PET scanner prototype. Adopted Agile (Jira, Scrum) at D3Clarity without prior experience, per a recommendation letter.</li>
+<li><strong>Critical review of AI output:</strong> checks LLM results against rule-based baselines, labeled control cases and source text; adopts AI-generated code or extractions only after they pass mechanical checks.</li>
+<li><strong>Communication with non-technical audiences:</strong> turned analyses into dashboards and executive reports used directly by client sales teams and decision-makers; taught KPI dashboarding at a business school.</li>
+<li><strong>Team development:</strong> founded and led a student Data Science group, supervised an undergraduate team at FIRA, and documented conventions so work did not depend on one person.</li>
+</ul>
+<hr>
+<h2>Experience</h2>
+<h3>Data Scientist &amp; ML Engineer | Independent Practice</h3>
+<p><strong>March 2026 - Present</strong></p>
+<ul>
+<li>Compared document-extraction methods (classical OCR, layout detectors, local vision and language models) head to head with character and word error rates against a ground-truth calibration set; adopted changes only on measured before/after results (doubtful lines reduced from 175 to 77 on a fixed sample).</li>
+<li>Evaluated LLM extraction against a regex baseline (recall, false positives, cost, runtime) and gated its use on a labeled control set of 26 positive and negative cases with an explicit acceptance criterion.</li>
+<li>Measured keyword, embedding and hybrid retrieval by recall@k against a hand-labeled question bank, documented the benchmark&#x27;s known bias, and estimated misses with fixed-seed stratified samples.</li>
+<li>Built unsupervised categorization of short Spanish text (embeddings, UMAP, HDBSCAN, FINCH) scored by silhouette, DBCV and ARI, with a KL-divergence screen for clusters explained by metadata.</li>
+<li>Designed and run the data system of a small retail business in production: PostgreSQL warehouse (40+ tables, PL/pgSQL), FIFO inventory valuation, and bank-to-invoice reconciliation with confidence tiers.</li>
+</ul>
+<h3>Economic Research Specialist (Data Scientist) | FIRA</h3>
+<p><strong>January 2025 - January 2026</strong></p>
+<ul>
+<li>Replaced one analyst&#x27;s manual Excel process with a scheduled pipeline: 74 extraction scripts (Python, Playwright) over 9+ public sources (INEGI, Banxico, USDA, others) loading PostgreSQL with provenance.</li>
+<li>Wrote 60+ PostgreSQL functions and indexed materialized views (window functions, JSONB, CTEs) computing economic indicators: inflation contributions, trade balances, supply-and-demand balances, crop yields.</li>
+<li>Built a crop-production model from Sentinel-2 and Planet Labs vegetation indices: outlier filtering, PCA, Random Forest and Gradient Boosting selected by 5-fold cross-validated RMSE, with held-out RMSE, MAE and R2.</li>
+<li>Delivered automated executive Excel reports and 15+ Apache Superset dashboards to decision-makers.</li>
+<li>Set governance conventions (raw data preserved, lineage, GitLab); supervised an undergraduate team.</li>
+</ul>
+<h3>Data Scientist | CITEIM</h3>
+<p><strong>October 2024 - January 2025</strong></p>
+<ul>
+<li>Scoped a Mexican Sign Language recognition system from a literature review and built its dataset: video sourcing via APIs, weak labels from subtitles (OCR, speech-to-text), MediaPipe keypoints.</li>
+</ul>
+<h3>Data Scientist &amp; Team Lead | Punto Singular</h3>
+<p><strong>December 2023 - August 2024</strong></p>
+<ul>
+<li>Led monthly analytics cycles for an EdTech client, from metric definition to results; KPI dashboards in Tableau and Looker.</li>
+<li>Founded and led a Data Science group of undergraduate students working on real client and nonprofit projects.</li>
+</ul>
+<h3>Data Scientist | BairesDev</h3>
+<p><strong>September 2023 - November 2023</strong></p>
+<ul>
+<li>Built a retrieval-augmented generation proof of concept that let a legal client&#x27;s lawyers query their contracts for obligations, risk clauses and precedents; also delivered transformer-based summarization and Neo4j graph modeling.</li>
+</ul>
+<h3>Data Scientist | D3Clarity (formerly Viqtor Davis North America)</h3>
+<p><strong>February 2019 - March 2023</strong></p>
+<ul>
+<li>First data scientist of the company; defined the analytics roadmap for US-based clients in a distributed team.</li>
+<li>Classified school-board minutes with NLP on Azure ML; built a Power BI dashboard for the client&#x27;s sales team.</li>
+<li>Built consumer-segment forecasting models, data lakes, automated ingestion and ETL on AWS.</li>
+</ul>
+<h3>Lecturer &amp; Mentor | Tecnologico de Monterrey, Campus Morelia</h3>
+<p><strong>2013 - 2014; 2023 - 2024</strong></p>
+<ul>
+<li>Taught KPI dashboarding (Tableau) at the Business School, plus math, physics and programming; mentored a robotics team.</li>
+</ul>
+<hr>
+<h2>Education</h2>
+<ul>
+<li><strong>PhD Candidate in Computer Physics</strong> - University of Michoacan (2009 - 2013). HAWC data analysis; 14 publications.</li>
+<li><strong>Master&#x27;s in Computer Science</strong> - INAOE (2006 - 2009). Thesis: text classification by prototype-based class reduction.</li>
+<li><strong>Bachelor&#x27;s in Physics and Mathematics</strong> - University of Michoacan (1998 - 2003).</li>
+</ul>
+<hr>
+<h2>Skills</h2>
+<ul>
+<li><strong>Python and ML:</strong> pandas, Polars, NumPy, SciPy, scikit-learn (Random Forest, Gradient Boosting, PCA, cross-validation), sentence-transformers, HDBSCAN/FINCH/UMAP, RAG, NER (GLiNER); PyTorch at prototype level</li>
+<li><strong>Evaluation and statistics:</strong> baselines and ground truth, control sets, k-fold cross-validation, RMSE/MAE/R2, recall@k, CER/WER, silhouette/DBCV/ARI, KL divergence, stratified sampling, documented benchmark bias</li>
+<li><strong>SQL, data and reporting:</strong> PostgreSQL (PL/pgSQL, window functions, materialized views, JSONB), SQLite, Oracle, MySQL, Neo4j; ETL, Playwright, APIs, lineage; Superset, Power BI, Tableau, Looker; R</li>
+<li><strong>Engineering and cloud:</strong> Git (GitHub, GitLab), modular code, locked dependencies (uv), credentials outside version control; AWS (EC2, SageMaker), Azure ML, Google Cloud service accounts</li>
+<li><strong>LLMs:</strong> Claude Code, local LLMs (Ollama), schema-constrained extraction, source-grounding checks</li>
+</ul>
+<hr>
+<h2>Certifications and Languages</h2>
+<ul>
+<li>AWS Certified Cloud Practitioner; Semarchy xDM</li>
+<li>Spanish (native), English (professional), Italian (basic-intermediate), French (basic)</li>
+</ul>
+<div class="footer">profile.juandedios.info/978822</div>
+</div>
+</body>
+</html>
